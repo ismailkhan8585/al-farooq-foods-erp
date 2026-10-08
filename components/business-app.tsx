@@ -36,20 +36,59 @@ import {
   formatPKR,
 } from '@/lib/db'
 
+import dynamic from 'next/dynamic'
 import DashboardView from './dashboard-view'
-import PosView from './pos-view'
-import SalesView, { type SalesSubTab } from './sales-view'
-import CustomerManagementView from './customer-management-view'
-import PurchasesExpensesView, { type PurchasesExpensesSubTab } from './purchases-expenses-view'
-import SuppliersManagementView from './suppliers-management-view'
-import ProductsView, { type ProductsSubTab } from './products-view'
-import RawMaterialsView from './raw-materials-view'
-import AccountsView, { type AccountsSubTab } from './accounts-view'
-import ReportsView, { type ReportCategoryKey } from './reports-view'
-import EmployeesView from './employees-view'
-import SettingsView from './settings-view'
+import type { SalesSubTab } from './sales-view'
+import type { PurchasesExpensesSubTab } from './purchases-expenses-view'
+import type { ProductsSubTab } from './products-view'
+import type { ReportCategoryKey } from './reports-view'
 import NotificationsPopover from './notifications-popover'
 import GlobalSearch from './global-search'
+import { ThemeToggle } from './theme-toggle'
+
+// Lightweight fallback skeleton for code-split modules
+function ModuleLoadingSkeleton() {
+  return (
+    <div className="view-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ height: '36px', width: '220px', borderRadius: '8px', background: 'var(--border)', opacity: 0.5 }} />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+        <div style={{ height: '110px', borderRadius: '12px', background: 'var(--card-bg, #161a22)', border: '1px solid var(--border)', opacity: 0.6 }} />
+        <div style={{ height: '110px', borderRadius: '12px', background: 'var(--card-bg, #161a22)', border: '1px solid var(--border)', opacity: 0.6 }} />
+        <div style={{ height: '110px', borderRadius: '12px', background: 'var(--card-bg, #161a22)', border: '1px solid var(--border)', opacity: 0.6 }} />
+      </div>
+      <div style={{ height: '360px', borderRadius: '12px', background: 'var(--card-bg, #161a22)', border: '1px solid var(--border)', opacity: 0.5 }} />
+    </div>
+  )
+}
+
+const PosView = dynamic(() => import('./pos-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const SalesView = dynamic(() => import('./sales-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const CustomerManagementView = dynamic(() => import('./customer-management-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const PurchasesExpensesView = dynamic(() => import('./purchases-expenses-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const SuppliersManagementView = dynamic(() => import('./suppliers-management-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const ProductsView = dynamic(() => import('./products-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const RawMaterialsView = dynamic(() => import('./raw-materials-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const EmployeesView = dynamic(() => import('./employees-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const ReportsView = dynamic(() => import('./reports-view'), { loading: () => <ModuleLoadingSkeleton /> })
+const SettingsView = dynamic(() => import('./settings-view'), { loading: () => <ModuleLoadingSkeleton /> })
+
+const preloadModule = (mod: ModuleKey | string) => {
+  switch (mod) {
+    case 'pos': import('./pos-view'); break
+    case 'sales': import('./sales-view'); break
+    case 'customer-management':
+    case 'phonebook': import('./customer-management-view'); break
+    case 'purchase':
+    case 'expenses': import('./purchases-expenses-view'); break
+    case 'suppliers-management': import('./suppliers-management-view'); break
+    case 'products': import('./products-view'); break
+    case 'raw-materials': import('./raw-materials-view'); break
+    case 'employees': import('./employees-view'); break
+    case 'reports': import('./reports-view'); break
+    case 'settings': import('./settings-view'); break
+    default: break
+  }
+}
 
 export default function BusinessApp() {
   const [db, setDb] = useState<AppDatabase>(initialDatabase)
@@ -69,6 +108,28 @@ export default function BusinessApp() {
     const loaded = loadDatabase()
     setDb(loaded)
     setIsClientLoaded(true)
+  }, [])
+
+  // Card spotlight: feed cursor position to the hovered card as --mx / --my (CSS draws the glow)
+  useEffect(() => {
+    const CARD_SELECTOR =
+      '.stat-card, .metric-card, .cc-card, .pos-product-card, [id^="pos-card-"], [id^="product-card-"], [id^="employee-card-"], [id^="raw-material-card-"], [id^="contact-card-"], #purchase-kpi-cards > div'
+    let frame = 0
+    const onMove = (e: PointerEvent) => {
+      const card = (e.target as Element | null)?.closest?.(CARD_SELECTOR) as HTMLElement | null
+      if (!card) return
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const r = card.getBoundingClientRect()
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`)
+        card.style.setProperty('--my', `${e.clientY - r.top}px`)
+      })
+    }
+    document.addEventListener('pointermove', onMove, { passive: true })
+    return () => {
+      document.removeEventListener('pointermove', onMove)
+      cancelAnimationFrame(frame)
+    }
   }, [])
 
   // Sync back to offline localStorage whenever db updates
@@ -168,6 +229,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'pos' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('pos')}
+            onMouseEnter={() => preloadModule('pos')}
             id="nav-pos"
           >
             <Store />
@@ -178,6 +240,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'sales' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('sales')}
+            onMouseEnter={() => preloadModule('sales')}
             id="nav-sales"
           >
             <ShoppingBag />
@@ -189,6 +252,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'customer-management' || activeModule === 'phonebook' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('customer-management', 'customers')}
+            onMouseEnter={() => preloadModule('customer-management')}
             id="nav-customer-management"
           >
             <UserCheck />
@@ -200,6 +264,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'purchase' || activeModule === 'expenses' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('purchase', 'purchases')}
+            onMouseEnter={() => preloadModule('purchase')}
             id="nav-purchases-expenses"
           >
             <Truck />
@@ -211,6 +276,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'suppliers-management' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('suppliers-management')}
+            onMouseEnter={() => preloadModule('suppliers-management')}
             id="nav-suppliers"
           >
             <Building2 />
@@ -222,6 +288,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'products' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('products')}
+            onMouseEnter={() => preloadModule('products')}
             id="nav-products"
           >
             <Package />
@@ -233,6 +300,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'raw-materials' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('raw-materials')}
+            onMouseEnter={() => preloadModule('raw-materials')}
             id="nav-raw-materials"
           >
             <Boxes />
@@ -244,6 +312,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'employees' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('employees')}
+            onMouseEnter={() => preloadModule('employees')}
             id="nav-employees"
           >
             <Users />
@@ -255,6 +324,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'reports' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('reports')}
+            onMouseEnter={() => preloadModule('reports')}
             id="nav-reports"
           >
             <TrendingUp />
@@ -265,6 +335,7 @@ export default function BusinessApp() {
           <button
             className={`nav-item ${activeModule === 'settings' ? 'nav-item-active' : ''}`}
             onClick={() => handleNavigate('settings')}
+            onMouseEnter={() => preloadModule('settings')}
             id="nav-settings"
           >
             <Settings />
@@ -320,6 +391,9 @@ export default function BusinessApp() {
 
             {/* Smart Action Alerts Notification Bell */}
             <NotificationsPopover db={db} onNavigate={handleNavigate} />
+
+            {/* Light / Dark mode switch */}
+            <ThemeToggle />
 
             <button
               className="icon-button"

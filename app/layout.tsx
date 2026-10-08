@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { THEME_INIT_SCRIPT } from '@/lib/theme-script'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
+  colorScheme: 'dark light',
   themeColor: '#7CB518',
   width: 'device-width',
   initialScale: 1,
@@ -24,8 +25,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className="bg-background" data-theme="dark" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Sets data-theme before first paint to avoid a flash of the wrong theme */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body className="antialiased">

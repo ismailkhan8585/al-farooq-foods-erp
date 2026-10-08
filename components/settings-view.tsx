@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Download, Upload, Shield, RefreshCw, CheckCircle, Database, Lock, AlertTriangle, Building } from 'lucide-react'
 import { exportDatabaseJSON, importDatabaseJSON, initialDatabase, type AppDatabase } from '@/lib/db'
+import { ThemeSelector } from './theme-toggle'
 
 interface SettingsViewProps {
   db: AppDatabase
@@ -12,7 +13,7 @@ interface SettingsViewProps {
 }
 
 export default function SettingsView({ db, isOwner, setIsOwner, onSaveDatabase }: SettingsViewProps) {
-  const [activeTab, setActiveTab] = useState<'backup' | 'roles' | 'company'>('backup')
+  const [activeTab, setActiveTab] = useState<'backup' | 'roles' | 'company' | 'appearance'>('backup')
   const [backupSuccess, setBackupSuccess] = useState(false)
   const [companyName, setCompanyName] = useState('AL FAROOQ FOODS')
   const [tagline, setTagline] = useState('Mineral Water, Fruit Juices, Confectionery & Snacks')
@@ -85,6 +86,13 @@ export default function SettingsView({ db, isOwner, setIsOwner, onSaveDatabase }
             onClick={() => setActiveTab('company')}
           >
             Company Profile & Header
+          </button>
+          <button
+            id="settings-tab-appearance"
+            className={activeTab === 'appearance' ? 'settings-active' : ''}
+            onClick={() => setActiveTab('appearance')}
+          >
+            Appearance & Theme
           </button>
         </div>
 
@@ -236,6 +244,18 @@ export default function SettingsView({ db, isOwner, setIsOwner, onSaveDatabase }
                   Save Profile
                 </button>
               </div>
+            </div>
+          )}
+
+          {/* TAB 4: APPEARANCE */}
+          {activeTab === 'appearance' && (
+            <div className="settings-form">
+              <h2>Appearance & Theme</h2>
+              <p>
+                Choose how AL FAROOQ FOODS looks on this device. Your choice is saved offline and applied
+                instantly across every screen.
+              </p>
+              <ThemeSelector />
             </div>
           )}
         </div>

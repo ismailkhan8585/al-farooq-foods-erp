@@ -42,15 +42,15 @@ interface PhonebookViewProps {
 
 // Preset color options for categories
 const CATEGORY_COLORS: Array<{ id: string; name: string; bg: string; text: string; border: string }> = [
-  { id: 'emerald', name: 'Emerald Green', bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200' },
-  { id: 'purple', name: 'Royal Purple', bg: 'bg-purple-50', text: 'text-purple-700', border: 'border-purple-200' },
-  { id: 'amber', name: 'Amber Gold', bg: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-  { id: 'blue', name: 'Deep Blue', bg: 'bg-blue-50', text: 'text-blue-700', border: 'border-blue-200' },
-  { id: 'orange', name: 'Warm Orange', bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
-  { id: 'teal', name: 'Teal Green', bg: 'bg-teal-50', text: 'text-teal-700', border: 'border-teal-200' },
-  { id: 'sky', name: 'Sky Blue', bg: 'bg-sky-50', text: 'text-sky-700', border: 'border-sky-200' },
-  { id: 'rose', name: 'Rose Red', bg: 'bg-rose-50', text: 'text-rose-700', border: 'border-rose-200' },
-  { id: 'stone', name: 'Warm Gray', bg: 'bg-stone-100', text: 'text-stone-700', border: 'border-stone-200' },
+  { id: 'emerald', name: 'Emerald Green', bg: 'bg-emerald-500/15', text: 'text-emerald-400', border: 'border-emerald-500/30' },
+  { id: 'purple', name: 'Royal Purple', bg: 'bg-purple-500/15', text: 'text-purple-400', border: 'border-purple-500/30' },
+  { id: 'amber', name: 'Amber Gold', bg: 'bg-amber-500/15', text: 'text-amber-400', border: 'border-amber-500/30' },
+  { id: 'blue', name: 'Deep Blue', bg: 'bg-blue-500/15', text: 'text-blue-400', border: 'border-blue-500/30' },
+  { id: 'orange', name: 'Warm Orange', bg: 'bg-orange-500/15', text: 'text-orange-400', border: 'border-orange-500/30' },
+  { id: 'teal', name: 'Teal Green', bg: 'bg-teal-500/15', text: 'text-teal-400', border: 'border-teal-500/30' },
+  { id: 'sky', name: 'Sky Blue', bg: 'bg-sky-500/15', text: 'text-sky-400', border: 'border-sky-500/30' },
+  { id: 'rose', name: 'Rose Red', bg: 'bg-rose-500/15', text: 'text-rose-400', border: 'border-rose-500/30' },
+  { id: 'stone', name: 'Warm Gray', bg: 'bg-slate-500/15', text: 'text-slate-400', border: 'border-slate-500/30' },
 ]
 
 // Common major commercial hubs in Pakistan for fast city selection
@@ -1019,24 +1019,24 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
               <div
                 key={item.id}
                 id={`contact-card-${item.id}`}
-                className="bg-white rounded-xl border border-[var(--border)] shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between p-4 relative group"
+                className="group bg-slate-900/90 hover:bg-slate-900/98 rounded-2xl p-4.5 shadow-lg border border-slate-800/80 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between relative overflow-hidden backdrop-blur-md hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(0,0,0,0.7),0_0_20px_-2px_rgba(34,197,94,0.12)]"
               >
                 <div>
                   {/* Card Header: Avatar, Name, Category badge, Star, and Actions */}
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2.5 flex-1 min-w-0">
-                      <div className="w-10 h-10 rounded-full bg-[#f0f7e8] text-[#7cb518] font-bold text-xs flex items-center justify-center shrink-0 border border-[#d6ebb8]">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-900/40 text-emerald-300 font-extrabold text-xs flex items-center justify-center shrink-0 border border-emerald-500/30 group-hover:scale-105 transition-transform shadow-xs">
                         {initials}
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-1.5">
-                          <h3 className="text-sm font-bold text-gray-900 truncate" title={item.name}>
+                          <h3 className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors truncate" title={item.name}>
                             {item.name}
                           </h3>
                         </div>
                         {item.businessName && (
-                          <div className="text-[11px] text-gray-500 truncate flex items-center gap-1 mt-0.5" title={item.businessName}>
-                            <Building2 className="w-3 h-3 text-gray-400 shrink-0" />
+                          <div className="text-[11px] text-stone-300 truncate flex items-center gap-1 mt-0.5" title={item.businessName}>
+                            <Building2 className="w-3 h-3 text-stone-500 shrink-0" />
                             <span className="truncate">{item.businessName}</span>
                           </div>
                         )}
@@ -1049,12 +1049,12 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
                         type="button"
                         id={`btn-star-${item.id}`}
                         onClick={() => handleToggleFavorite(item.id)}
-                        className="p-1 rounded-md text-gray-400 hover:text-amber-500 hover:bg-gray-100 transition-colors"
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-amber-400 hover:bg-white/[0.06] transition-colors"
                         title={item.isFavorite ? 'Remove from Starred' : 'Star this contact'}
                       >
                         <Star
                           className={`w-4 h-4 ${
-                            item.isFavorite ? 'fill-amber-400 text-amber-400' : 'text-gray-400'
+                            item.isFavorite ? 'fill-amber-400 text-amber-400' : 'text-stone-400'
                           }`}
                         />
                       </button>
@@ -1064,7 +1064,7 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
                         type="button"
                         id={`btn-edit-${item.id}`}
                         onClick={() => handleOpenEditContact(item)}
-                        className="p-1 rounded-md text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-blue-400 hover:bg-white/[0.06] transition-colors"
                         title="Edit this contact"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
@@ -1075,7 +1075,7 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
                         type="button"
                         id={`btn-delete-${item.id}`}
                         onClick={() => setContactToDelete(item)}
-                        className="p-1 rounded-md text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-rose-400 hover:bg-white/[0.06] transition-colors"
                         title="Delete contact"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -1085,50 +1085,50 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
 
                   {/* Category Pill */}
                   <div className="mb-2.5">
-                    <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded border ${badgeClass}`}>
+                    <span className={`inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs ${badgeClass}`}>
                       {item.category || 'General & Personal'}
                     </span>
                   </div>
 
                   {/* Contact Info: Phone, Alt, City, Address */}
-                  <div className="space-y-1.5 my-3 text-xs text-gray-600 bg-gray-50/80 p-2.5 rounded-lg border border-gray-100">
+                  <div className="space-y-1.5 my-3 text-xs text-stone-300 bg-white/[0.03] p-3 rounded-xl border border-white/[0.06]">
                     {/* Primary Phone */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1.5 font-mono font-bold text-gray-900">
-                        <Phone className="w-3.5 h-3.5 text-[#7cb518] shrink-0" />
+                      <div className="flex items-center gap-1.5 font-mono font-bold text-white">
+                        <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                         <span>{item.phone}</span>
                       </div>
                       <button
                         type="button"
                         id={`btn-copy-${item.id}`}
                         onClick={() => handleCopyPhone(item.phone, item.id)}
-                        className="text-[10px] font-medium text-gray-500 hover:text-gray-800 flex items-center gap-1 p-0.5"
+                        className="text-[10px] font-medium text-stone-400 hover:text-white flex items-center gap-1 p-0.5"
                         title="Copy phone number"
                       >
                         {copiedPhoneId === item.id ? (
-                          <span className="text-[#7cb518] flex items-center gap-0.5 font-bold">
+                          <span className="text-emerald-400 flex items-center gap-0.5 font-bold">
                             <Check className="w-3 h-3" /> Copied
                           </span>
                         ) : (
-                          <Copy className="w-3 h-3 text-gray-400" />
+                          <Copy className="w-3 h-3 text-stone-400" />
                         )}
                       </button>
                     </div>
 
                     {/* Alternate Phone if present */}
                     {item.altPhone && (
-                      <div className="flex items-center gap-1.5 text-[11px] text-gray-500 font-mono">
-                        <span className="text-[10px] text-gray-400">Alt:</span>
+                      <div className="flex items-center gap-1.5 text-[11px] text-stone-400 font-mono">
+                        <span className="text-[10px] text-stone-500">Alt:</span>
                         <span>{item.altPhone}</span>
                       </div>
                     )}
 
                     {/* Location */}
                     {(item.city || item.address) && (
-                      <div className="flex items-start gap-1.5 text-[11px] text-gray-600 pt-1 border-t border-gray-200/60">
-                        <MapPin className="w-3 h-3 text-gray-400 shrink-0 mt-0.5" />
+                      <div className="flex items-start gap-1.5 text-[11px] text-stone-400 pt-1.5 border-t border-white/[0.06]">
+                        <MapPin className="w-3 h-3 text-emerald-400 shrink-0 mt-0.5" />
                         <span className="line-clamp-1">
-                          {item.city && <strong className="text-gray-700 font-semibold">{item.city}</strong>}
+                          {item.city && <strong className="text-white font-semibold">{item.city}</strong>}
                           {item.city && item.address && ' · '}
                           {item.address}
                         </span>
@@ -1137,7 +1137,7 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
 
                     {/* Notes if present */}
                     {item.notes && (
-                      <div className="text-[11px] text-gray-500 italic line-clamp-1 pt-0.5">
+                      <div className="text-[11px] text-stone-400 italic line-clamp-1 pt-0.5">
                         &ldquo;{item.notes}&rdquo;
                       </div>
                     )}
@@ -1145,13 +1145,13 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
                 </div>
 
                 {/* Card Action Buttons: Direct Call and WhatsApp */}
-                <div className="flex gap-2 pt-2 border-t border-gray-100">
+                <div className="flex gap-2 pt-2.5 border-t border-white/[0.08]">
                   <a
                     href={`tel:${item.phone.replace(/[^0-9+]/g, '')}`}
                     id={`btn-call-${item.id}`}
-                    className="button secondary flex-1 text-xs py-1.5 h-auto text-center flex items-center justify-center gap-1.5 font-semibold text-gray-700 hover:text-gray-900"
+                    className="flex-1 py-1.5 px-3 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] text-xs font-semibold text-stone-200 hover:text-white flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-98"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#7cb518]" /> Call
+                    <Phone className="w-3.5 h-3.5 text-blue-400" /> Call
                   </a>
 
                   <a
@@ -1159,9 +1159,9 @@ export default function PhonebookView({ db, onSaveDatabase }: PhonebookViewProps
                     target="_blank"
                     rel="noreferrer"
                     id={`btn-whatsapp-${item.id}`}
-                    className="button primary flex-1 text-xs py-1.5 h-auto text-center flex items-center justify-center gap-1.5 bg-[#25D366] text-white border-0 shadow-none hover:bg-[#1EBE5D] font-semibold"
+                    className="flex-1 py-1.5 px-3 rounded-xl border border-emerald-500/30 bg-emerald-500/15 hover:bg-emerald-500/25 text-xs font-semibold text-emerald-300 hover:text-emerald-200 flex items-center justify-center gap-1.5 transition-all shadow-xs active:scale-98"
                   >
-                    <MessageSquare className="w-3.5 h-3.5 fill-white" /> WhatsApp
+                    <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp
                   </a>
                 </div>
               </div>

@@ -771,30 +771,24 @@ export default function CustomerManagementView({
                   .join('')
                   .toUpperCase()
 
-                // Category style & icon
-                let catBadgeClass = 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                let catAvatarClass = 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                // Category tone (accent colour as RGB triplet, consumed by CSS via --cc-accent)
+                let catAccent = '34, 197, 94'
                 let catIcon = <Store className="w-3 h-3 shrink-0" />
 
                 if (cat.name === 'Distributor') {
-                  catBadgeClass = 'bg-blue-50 text-blue-700 border-blue-200'
-                  catAvatarClass = 'bg-blue-100 text-blue-800 border-blue-200'
+                  catAccent = '96, 165, 250'
                   catIcon = <Building2 className="w-3 h-3 shrink-0" />
                 } else if (cat.name === 'Sales Man' || cat.name === 'Sales Representative') {
-                  catBadgeClass = 'bg-purple-50 text-purple-700 border-purple-200'
-                  catAvatarClass = 'bg-purple-100 text-purple-800 border-purple-200'
+                  catAccent = '167, 139, 250'
                   catIcon = <UserCheck className="w-3 h-3 shrink-0" />
                 } else if (cat.parentType === 'Wholesaler' || cat.name === 'Wholesaler') {
-                  catBadgeClass = 'bg-sky-50 text-sky-700 border-sky-200'
-                  catAvatarClass = 'bg-sky-100 text-sky-800 border-sky-200'
+                  catAccent = '34, 211, 238'
                   catIcon = <Building2 className="w-3 h-3 shrink-0" />
                 } else if (cat.parentType === 'Walk-in' || cat.name === 'Walk-in Customer' || cat.name === 'Counter') {
-                  catBadgeClass = 'bg-stone-100 text-stone-700 border-stone-200'
-                  catAvatarClass = 'bg-stone-100 text-stone-700 border-stone-200'
+                  catAccent = '148, 163, 184'
                   catIcon = <Users className="w-3 h-3 shrink-0" />
                 } else if (cat.parentType !== 'Retailer' && cat.name !== 'Retailer') {
-                  catBadgeClass = 'bg-amber-50 text-amber-700 border-amber-200'
-                  catAvatarClass = 'bg-amber-100 text-amber-800 border-amber-200'
+                  catAccent = '251, 191, 36'
                   catIcon = <Briefcase className="w-3 h-3 shrink-0" />
                 }
 
@@ -809,187 +803,180 @@ export default function CustomerManagementView({
                 const waDisplay = c.altPhone || c.phone
 
                 const creditPercent = c.creditLimit > 0 ? Math.min(100, Math.round((c.currentBalance / c.creditLimit) * 100)) : 0
+                const balanceState = isOverLimit ? 'over' : c.currentBalance > 0 ? 'due' : 'clear'
+                const progressTone = creditPercent >= 85 ? 'danger' : creditPercent >= 60 ? 'warn' : 'ok'
+
+                // Contextual insight revealed on hover
+                const insight =
+                  balanceState === 'over'
+                    ? `Over limit by ${formatPKR(c.currentBalance - c.creditLimit)}`
+                    : balanceState === 'clear'
+                    ? 'No pending dues — account fully settled'
+                    : c.creditLimit > 0
+                    ? `Available credit ${formatPKR(Math.max(0, c.creditLimit - c.currentBalance))}`
+                    : `Opening balance ${formatPKR(c.openingBalance)}`
 
                 return (
                   <div
                     key={c.id}
-                    className="group bg-white rounded-2xl p-4.5 sm:p-5 shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between relative border border-stone-200 hover:border-stone-300"
                     id={`customer-card-${c.id}`}
+                    className="cc-card"
+                    style={{ '--cc-accent': catAccent } as React.CSSProperties}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setSelectedCustomerId(c.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') setSelectedCustomerId(c.id)
+                    }}
+                    onMouseMove={(e) => {
+                      const r = e.currentTarget.getBoundingClientRect()
+                      e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+                      e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+                    }}
                   >
-                    <div className="space-y-3.5">
-                      {/* Top Row: Avatar + Customer Name + Category Badge + ID */}
-                      <div className="flex items-start gap-3">
-                        <div
-                          className={`w-11 h-11 rounded-xl font-bold text-xs flex items-center justify-center shadow-2xs border shrink-0 transition-transform group-hover:scale-105 ${catAvatarClass}`}
-                          title={`${c.name} (${cat.name})`}
-                        >
-                          {initials}
-                        </div>
-
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-1.5">
-                            <h3
-                              className="font-bold text-stone-900 text-sm leading-snug group-hover:text-emerald-700 transition-colors truncate"
-                              title={c.name}
-                            >
-                              {c.name}
-                            </h3>
-                            {c.customerId && (
-                              <span className="text-[9.5px] font-mono font-bold text-stone-500 bg-stone-100 px-1.5 py-0.5 rounded shrink-0 border border-stone-200/60">
-                                {c.customerId}
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                            <span
-                              className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md border shadow-2xs shrink-0 ${catBadgeClass}`}
-                            >
-                              {catIcon}
-                              <span>{cat.name}</span>
-                            </span>
-                            {c.businessName && (
-                              <span className="text-[11px] text-stone-500 font-medium truncate" title={c.businessName}>
-                                {c.businessName}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Location Row */}
-                      <div className="flex items-center gap-1.5 text-stone-500 text-xs">
-                        <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-                        <span
-                          className="truncate text-[11.5px]"
-                          title={`${c.city ? c.city + ' · ' : ''}${c.address || 'Address not specified'}`}
-                        >
-                          {c.city && <strong className="text-stone-700">{c.city} · </strong>}
-                          {c.address || 'Address not specified'}
-                        </span>
-                      </div>
-
-                      {/* Financial & Dues Box — Full Width & Structured */}
-                      <div
-                        className={`rounded-xl p-3 border transition-colors ${
-                          c.currentBalance > 0
-                            ? 'bg-rose-50/50 border-rose-200/80 text-rose-950'
-                            : 'bg-stone-50/90 border-stone-200/80 text-stone-800'
-                        }`}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-stone-500">
-                            {c.currentBalance > 0 ? 'Outstanding Due' : 'Balance Settled'}
-                          </span>
-                          {isOverLimit ? (
-                            <span className="text-[10px] text-rose-700 bg-rose-100 border border-rose-200 px-1.5 py-0.5 rounded-md font-bold flex items-center gap-1">
-                              <AlertCircle className="w-3 h-3" /> Over Limit
-                            </span>
-                          ) : c.currentBalance > 0 ? (
-                            <span className="text-[10px] text-amber-800 bg-amber-100/90 border border-amber-200 px-1.5 py-0.5 rounded-md font-bold">
-                              Receivable
-                            </span>
-                          ) : (
-                            <span className="text-[10px] text-emerald-800 bg-emerald-100/90 border border-emerald-200 px-1.5 py-0.5 rounded-md font-bold">
-                              Clear
-                            </span>
-                          )}
-                        </div>
-
-                        <div className="mt-1">
-                          <strong
-                            className={`text-base sm:text-lg font-black block tracking-tight ${
-                              c.currentBalance > 0 ? 'text-rose-700' : 'text-emerald-700'
-                            }`}
-                          >
-                            {formatPKR(c.currentBalance)}
-                          </strong>
-                        </div>
-
-                        <div className="mt-1.5 pt-1.5 border-t border-stone-200/60 flex items-center justify-between text-[11px] text-stone-500">
-                          <span>
-                            {c.creditLimit > 0 ? (
-                              <span>Limit: <strong className="text-stone-700">{formatPKR(c.creditLimit)}</strong></span>
-                            ) : (
-                              <span>Opening: <strong className="text-stone-700">{formatPKR(c.openingBalance)}</strong></span>
-                            )}
-                          </span>
-                          {c.creditLimit > 0 && (
-                            <span className="font-semibold text-stone-600">
-                              {creditPercent}% used
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Contact Row */}
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={telUrl}
-                          onClick={(e) => e.stopPropagation()}
-                          className={`flex-1 inline-flex items-center justify-center gap-1.5 text-xs font-mono py-1.5 px-2.5 rounded-xl border transition-all truncate ${
-                            c.phone
-                              ? 'bg-stone-50 text-stone-700 border-stone-200 hover:bg-stone-100 hover:text-stone-900 active:scale-98'
-                              : 'bg-stone-50/40 text-stone-300 border-stone-100 pointer-events-none'
-                          }`}
-                          title={c.phone ? `Call ${c.name} (${c.phone})` : 'No phone number'}
-                        >
-                          <Phone className="w-3 h-3 text-stone-500 shrink-0" />
-                          <span className="truncate">{c.phone || 'No phone'}</span>
-                        </a>
-
-                        <a
-                          href={waUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className={`inline-flex items-center justify-center gap-1.5 text-xs font-semibold py-1.5 px-3 rounded-xl border transition-all shrink-0 ${
-                            waUrl
-                              ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100 active:scale-98'
-                              : 'bg-stone-50/40 text-stone-300 border-stone-100 pointer-events-none'
-                          }`}
-                          title={waDisplay ? `WhatsApp ${c.name} (${waDisplay})` : 'No WhatsApp number'}
-                        >
-                          <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                          <span>WhatsApp</span>
-                        </a>
-                      </div>
-                    </div>
-
-                    {/* Bottom Action Row */}
-                    <div
-                      className="pt-3 mt-3.5 border-t border-stone-100 flex items-center justify-between gap-2"
-                      onClick={(e) => e.stopPropagation()}
-                    >
+                    {/* Quick actions — slide in on hover */}
+                    <div className="cc-quick" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
-                        className="flex-1 py-1.5 px-3 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-xl border border-emerald-200 transition-colors flex items-center justify-center gap-1.5 shadow-2xs"
-                        onClick={() => setSelectedCustomerId(c.id)}
-                        title="Open Customer Profile (Ledger, Transactions, Invoices)"
-                      >
-                        <Eye className="w-3.5 h-3.5 text-emerald-700" />
-                        <span>View Profile</span>
-                      </button>
-                      <button
-                        type="button"
-                        className="p-1.5 text-stone-500 hover:text-stone-800 hover:bg-stone-100 rounded-xl border border-stone-200 transition-colors"
+                        className="cc-quick-btn cc-icon-edit"
                         title="Edit Customer Details"
+                        aria-label="Edit"
                         onClick={() => setEditingCustomer(c)}
                       >
                         <Edit className="w-3.5 h-3.5" />
                       </button>
                       <button
                         type="button"
-                        className="p-1.5 text-rose-500 hover:text-rose-700 hover:bg-rose-50 rounded-xl border border-stone-200 hover:border-rose-200 transition-colors"
+                        className="cc-quick-btn cc-icon-delete"
                         title="Delete Customer Profile"
+                        aria-label="Delete"
                         onClick={() => requestDeleteCustomer(c)}
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                  </div>
-                )
-              })}
+
+                    {/* Header: Avatar + Name + ID + Category */}
+                    <div className="cc-head">
+                      <div className="cc-avatar">{initials}</div>
+                      <div className="cc-title">
+                        <div className="cc-name-row">
+                          <h3 className="cc-name" title={c.name}>{c.name}</h3>
+                          {c.customerId && <span className="cc-id">{c.customerId}</span>}
+                        </div>
+                        <span className="cc-badge">
+                          {catIcon}
+                          <span>{cat.name}</span>
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Meta: Business, Location, Phone */}
+                    <ul className="cc-meta">
+                      {c.businessName && (
+                        <li title={c.businessName}>
+                          <Store className="cc-meta-icon" />
+                          <span>{c.businessName}</span>
+                        </li>
+                      )}
+                      <li title={`${c.city ? c.city + ' · ' : ''}${c.address || 'Address not specified'}`}>
+                        <MapPin className="cc-meta-icon" />
+                        <span>
+                          {c.city && <strong>{c.city}</strong>}
+                          {c.city && ' · '}
+                          {c.address || 'Address not specified'}
+                        </span>
+                      </li>
+                      <li>
+                        <Phone className="cc-meta-icon" />
+                        <span className="cc-mono">{c.phone || 'No phone number'}</span>
+                      </li>
+                    </ul>
+
+                      {/* Balance */}
+                      <div className={`cc-balance cc-balance-${balanceState}`}>
+                        <div className="cc-balance-top">
+                          <span className="cc-balance-label">
+                            {balanceState === 'clear' ? 'Balance' : 'Outstanding'}
+                          </span>
+                          <span className="cc-status">
+                            {balanceState === 'over' ? (
+                              <><AlertCircle className="w-3 h-3" /> Over Limit</>
+                            ) : balanceState === 'due' ? (
+                              <><TrendingUp className="w-3 h-3" /> Receivable</>
+                            ) : (
+                              <><CheckCircle2 className="w-3 h-3" /> Settled</>
+                            )}
+                          </span>
+                        </div>
+                        <div className="cc-amount">{formatPKR(c.currentBalance)}</div>
+
+                        {c.creditLimit > 0 ? (
+                          <>
+                            <div className={`cc-progress cc-progress-${progressTone}`}>
+                              <span style={{ width: `${creditPercent}%` }} />
+                            </div>
+                            <div className="cc-limit">
+                              <span>Limit <strong>{formatPKR(c.creditLimit)}</strong></span>
+                              <span>{creditPercent}% used</span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="cc-limit">
+                            <span>Opening <strong>{formatPKR(c.openingBalance)}</strong></span>
+                            <span>No limit</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Prominent Modern Hover Reveal Drawer */}
+                      <div className="cc-hover-drawer">
+                        <div className="cc-hover-pill">
+                          <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                          <span className="cc-hover-text">{insight}</span>
+                          <ChevronRight className="w-3.5 h-3.5 text-emerald-400 shrink-0 cc-hover-arrow" />
+                        </div>
+                      </div>
+
+                      {/* Footer actions */}
+                      <div className="cc-footer" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          type="button"
+                          className="cc-view"
+                          onClick={() => setSelectedCustomerId(c.id)}
+                          title="Open Customer Profile (Ledger, Transactions, Invoices)"
+                        >
+                          <Eye className="w-3.5 h-3.5 shrink-0" />
+                          <span className="cc-view-text cc-view-default">View Profile</span>
+                          <span className="cc-view-text cc-view-hover">Open Full Ledger</span>
+                          <ChevronRight className="cc-view-arrow shrink-0" />
+                        </button>
+                        <div className="cc-actions">
+                          <a
+                            href={telUrl}
+                            className={`cc-icon-btn cc-icon-call ${telUrl ? '' : 'is-disabled'}`}
+                            title={c.phone ? `Call ${c.name} (${c.phone})` : 'No phone number'}
+                            aria-label="Call"
+                          >
+                            <Phone className="w-3.5 h-3.5" />
+                            <span className="cc-tooltip">Call</span>
+                          </a>
+                          <a
+                            href={waUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`cc-icon-btn cc-icon-wa ${waUrl ? '' : 'is-disabled'}`}
+                            title={waDisplay ? `WhatsApp ${c.name} (${waDisplay})` : 'No WhatsApp number'}
+                            aria-label="WhatsApp"
+                          >
+                            <MessageCircle className="w-3.5 h-3.5" />
+                            <span className="cc-tooltip">WhatsApp</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
             </div>
           )}
         </>
@@ -1044,32 +1031,32 @@ export default function CustomerManagementView({
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-5 border-b border-stone-100">
               <div className="flex items-start gap-4">
                 <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shadow-2xs flex-shrink-0 ${
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl shadow-md border bg-gradient-to-br flex-shrink-0 ${
                     getCustomerCategoryInfo(selectedCustomer).parentType === 'Wholesaler'
-                      ? 'bg-blue-100 text-blue-800'
+                      ? 'from-cyan-600/30 via-sky-600/40 to-cyan-950/70 text-cyan-300 border-cyan-500/40 ring-1 ring-cyan-500/20'
                       : getCustomerCategoryInfo(selectedCustomer).parentType === 'Walk-in'
-                      ? 'bg-stone-100 text-stone-700'
-                      : 'bg-emerald-100 text-emerald-800'
+                      ? 'from-slate-600/30 via-stone-700/40 to-slate-950/70 text-slate-300 border-slate-600/40 ring-1 ring-slate-500/20'
+                      : 'from-emerald-600/30 via-teal-600/40 to-emerald-950/70 text-emerald-300 border-emerald-500/40 ring-1 ring-emerald-500/20'
                   }`}
                 >
                   {selectedCustomer.name.slice(0, 2).toUpperCase()}
                 </div>
                 <div>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-2xl font-black text-stone-900">{selectedCustomer.name}</h1>
+                    <h1 className="text-2xl font-black text-white">{selectedCustomer.name}</h1>
                     <span
-                      className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                      className={`text-xs font-bold px-3 py-1 rounded-full border shadow-2xs ${
                         getCustomerCategoryInfo(selectedCustomer).parentType === 'Wholesaler'
-                          ? 'bg-blue-100 text-blue-800'
+                          ? 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
                           : getCustomerCategoryInfo(selectedCustomer).parentType === 'Walk-in'
-                          ? 'bg-stone-100 text-stone-700'
-                          : 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-slate-500/15 text-slate-300 border-slate-500/30'
+                          : 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
                       }`}
                     >
                       {getCustomerCategoryInfo(selectedCustomer).name}
                     </span>
                     {selectedCustomer.customerId && (
-                      <span className="text-xs bg-stone-100 text-stone-700 font-mono px-2 py-0.5 rounded-md font-semibold">
+                      <span className="text-xs bg-white/[0.06] text-stone-300 font-mono px-2 py-0.5 rounded-md font-semibold border border-white/10">
                         ID: {selectedCustomer.customerId}
                       </span>
                     )}

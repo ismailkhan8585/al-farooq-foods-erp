@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350f" />
+      <stop offset="50%" stop-color="#b45309" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+
+    <radialGradient id="glow9" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Golden Butter Candy Roll Texture -->
+    <linearGradient id="butterRoll" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="30%" stop-color="#facc15" />
+      <stop offset="70%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <!-- Dispenser Box Body Gradient -->
+    <linearGradient id="dispenserBox" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+
+    <filter id="shadow9" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrad9)" />
+  <circle cx="200" cy="140" r="140" fill="url(#glow9)" />
+  <ellipse cx="200" cy="264" rx="120" ry="18" fill="#000000" opacity="0.45" filter="url(#shadow9)" />
+
+  <!-- 72-PACK COUNTER DISPENSER BOX & CANDY ROLLS -->
+  <g filter="url(#shadow9)">
+    <!-- Back Pop-up Header Board of Box -->
+    <path d="M 125 90 L 125 50 Q 125 45 130 45 L 270 45 Q 275 45 275 50 L 275 90 Z" fill="#92400e" />
+    <rect x="135" y="52" width="130" height="32" rx="4" fill="#facc15" />
+    <text x="200" y="66" font-family="Arial, sans-serif" font-size="7" font-weight="900" fill="#451a03" text-anchor="middle" letter-spacing="0.5">FAROOQ BUTTER CANDY</text>
+    <text x="200" y="78" font-family="Arial, sans-serif" font-size="5.5" font-weight="800" fill="#92400e" text-anchor="middle">72 ROLLS DISPLAY DISPENSER</text>
+
+    <!-- Dispenser Box Outer Shell (Slanted Front) -->
+    <path d="M 125 90 
+             L 275 90 
+             L 282 245 
+             Q 282 254 270 254 
+             L 130 254 
+             Q 118 254 118 245 Z" 
+          fill="url(#dispenserBox)" />
+
+    <!-- Interior Cavity with Stacks of Cylindrical Butter Candy Rolls -->
+    <rect x="130" y="95" width="140" height="95" rx="4" fill="#451a03" />
+
+    <!-- Row of Candy Rolls inside -->
+    <!-- Top Row -->
+    <g transform="translate(136, 102)">
+      <rect x="0" y="0" width="128" height="18" rx="6" fill="url(#butterRoll)" stroke="#78350f" stroke-width="1" />
+      <text x="64" y="12" font-family="Arial, sans-serif" font-size="6" font-weight="900" fill="#78350f" text-anchor="middle" letter-spacing="1">BUTTER CANDY ROLL</text>
+    </g>
+    <!-- Second Row -->
+    <g transform="translate(136, 124)">
+      <rect x="0" y="0" width="128" height="18" rx="6" fill="url(#butterRoll)" stroke="#78350f" stroke-width="1" />
+      <text x="64" y="12" font-family="Arial, sans-serif" font-size="6" font-weight="900" fill="#78350f" text-anchor="middle" letter-spacing="1">BUTTER CANDY ROLL</text>
+    </g>
+    <!-- Third Row -->
+    <g transform="translate(136, 146)">
+      <rect x="0" y="0" width="128" height="18" rx="6" fill="url(#butterRoll)" stroke="#78350f" stroke-width="1" />
+      <text x="64" y="12" font-family="Arial, sans-serif" font-size="6" font-weight="900" fill="#78350f" text-anchor="middle" letter-spacing="1">BUTTER CANDY ROLL</text>
+    </g>
+    <!-- Fourth Row / Dispenser Front Lip -->
+    <g transform="translate(136, 168)">
+      <rect x="0" y="0" width="128" height="18" rx="6" fill="url(#butterRoll)" stroke="#78350f" stroke-width="1" />
+      <text x="64" y="12" font-family="Arial, sans-serif" font-size="6" font-weight="900" fill="#78350f" text-anchor="middle" letter-spacing="1">BUTTER CANDY ROLL</text>
+    </g>
+
+    <!-- Front Low Cutout for Grabbing Rolls -->
+    <path d="M 118 200 Q 200 185 282 200 L 282 245 Q 282 254 270 254 L 130 254 Q 118 254 118 245 Z" fill="#d97706" />
+
+    <!-- Front Box Branding -->
+    <rect x="135" y="208" width="130" height="36" rx="4" fill="#78350f" />
+    <text x="200" y="222" font-family="Arial, sans-serif" font-size="7" font-weight="900" fill="#facc15" text-anchor="middle">FAROOQ BUTTER CANDY</text>
+    <text x="200" y="234" font-family="Arial, sans-serif" font-size="5" font-weight="700" fill="#fef3c7" text-anchor="middle">PURE RICH BUTTERSCOTCH</text>
+  </g>
+
+  <!-- Packaging Badge Top Left -->
+  <g transform="translate(16, 16)">
+    <rect x="0" y="0" width="126" height="26" rx="13" fill="#0a0f1d" fill-opacity="0.85" stroke="#facc15" stroke-width="1" />
+    <circle cx="14" cy="13" r="5" fill="#f59e0b" />
+    <text x="26" y="17" font-family="Arial, sans-serif" font-size="9.5" font-weight="800" fill="#ffffff" letter-spacing="0.3">72-ROLL DISPENSER</text>
+  </g>
+
+  <!-- Watermark -->
+  <g transform="translate(16, 252)">
+    <rect x="0" y="0" width="164" height="28" rx="8" fill="#0f172a" fill-opacity="0.88" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="10" y="13" font-family="Arial, sans-serif" font-size="8.5" font-weight="900" fill="#facc15">AL-FAROOQ FOODS</text>
+    <text x="10" y="23" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">Butter Candy Roll 72-pack</text>
+  </g>
+</svg>

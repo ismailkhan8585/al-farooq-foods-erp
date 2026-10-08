@@ -1349,15 +1349,16 @@ export default function PosView({ db, onSaveDatabase, onNavigate }: PosViewProps
               return (
                 <div
                   key={p.id}
+                  id={`pos-card-${p.id}`}
                   onClick={() => {
                     if (!isOut) handleAddToCart(p)
                   }}
-                  className={`group relative bg-white rounded-2xl p-2.5 flex flex-col justify-between transition-all duration-150 select-none shadow-xs hover:shadow-md ${
+                  className={`pos-product-card group relative rounded-2xl p-2.5 flex flex-col justify-between select-none ${
                     isOut
                       ? 'opacity-50 cursor-not-allowed'
                       : inCartItem
                       ? 'cursor-pointer ring-2 ring-lime-500/80 bg-lime-50/20'
-                      : 'cursor-pointer hover:-translate-y-0.5'
+                      : 'cursor-pointer'
                   }`}
                 >
                   {/* Top Image Box */}

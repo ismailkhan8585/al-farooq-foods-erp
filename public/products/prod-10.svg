@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#713f12" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <radialGradient id="glow10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#eab308" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Metallic Foil Snack Pouch Gradient -->
+    <linearGradient id="foilBag" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ca8a04" />
+      <stop offset="25%" stop-color="#eab308" />
+      <stop offset="50%" stop-color="#fef08a" />
+      <stop offset="75%" stop-color="#facc15" />
+      <stop offset="100%" stop-color="#a16207" />
+    </linearGradient>
+
+    <!-- Golden Crispy Potato Chips Texture -->
+    <linearGradient id="chipTexture" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef9c3" />
+      <stop offset="50%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <filter id="shadow10" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrad10)" />
+  <circle cx="200" cy="140" r="140" fill="url(#glow10)" />
+  <ellipse cx="200" cy="264" rx="115" ry="16" fill="#000000" opacity="0.45" filter="url(#shadow10)" />
+
+  <!-- CRISPY POTATO CHIPS FLYING AROUND POUCH -->
+  <!-- Chip 1 on Left -->
+  <g transform="translate(100, 195) rotate(-25)">
+    <path d="M 0 15 Q 20 -8 45 4 Q 55 24 35 32 Q 10 32 0 15 Z" fill="url(#chipTexture)" stroke="#ca8a04" stroke-width="0.8" />
+    <!-- Ridge Texture -->
+    <path d="M 8 16 Q 22 2 38 12" fill="none" stroke="#eab308" stroke-width="1.2" />
+    <path d="M 14 24 Q 28 12 40 22" fill="none" stroke="#eab308" stroke-width="1.2" />
+  </g>
+
+  <!-- Chip 2 on Right -->
+  <g transform="translate(265, 205) rotate(20)">
+    <path d="M 0 15 Q 20 -8 45 4 Q 55 24 35 32 Q 10 32 0 15 Z" fill="url(#chipTexture)" stroke="#ca8a04" stroke-width="0.8" />
+    <path d="M 8 16 Q 22 2 38 12" fill="none" stroke="#eab308" stroke-width="1.2" />
+  </g>
+
+  <!-- Salt Crystal sparkles -->
+  <circle cx="135" cy="180" r="2" fill="#ffffff" />
+  <circle cx="150" cy="210" r="1.5" fill="#ffffff" />
+  <circle cx="260" cy="175" r="2" fill="#ffffff" />
+  <circle cx="275" cy="190" r="1.5" fill="#ffffff" />
+
+  <!-- 40G METALLIC CRISPY CHIPS SNACK POUCH -->
+  <g filter="url(#shadow10)">
+    <!-- Pillow Pouch Body -->
+    <path d="M 165 60 
+             Q 200 56 235 60 
+             Q 248 145 242 235 
+             Q 200 242 158 235 
+             Q 152 145 165 60 Z" 
+          fill="url(#foilBag)" />
+
+    <!-- Top Crimped Seal -->
+    <rect x="160" y="54" width="80" height="10" rx="2" fill="#a16207" />
+    <line x1="162" y1="56" x2="162" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="166" y1="56" x2="166" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="170" y1="56" x2="170" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="200" y1="56" x2="200" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="230" y1="56" x2="230" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="234" y1="56" x2="234" y2="62" stroke="#fef08a" stroke-width="1" />
+    <line x1="238" y1="56" x2="238" y2="62" stroke="#fef08a" stroke-width="1" />
+
+    <!-- Bottom Crimped Seal -->
+    <rect x="156" y="234" width="88" height="10" rx="2" fill="#a16207" />
+
+    <!-- Metallic Reflection Sheen down center -->
+    <path d="M 195 64 Q 190 145 194 232 L 202 232 Q 200 145 203 64 Z" fill="#ffffff" opacity="0.6" />
+
+    <!-- Front Graphic Plate on Pouch -->
+    <!-- Blue Brand Ribbon -->
+    <rect x="162" y="80" width="76" height="24" rx="4" fill="#0284c7" />
+    <text x="200" y="94" font-family="Arial, sans-serif" font-size="6.5" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">FAROOQ CHIPS</text>
+    <text x="200" y="101" font-family="Arial, sans-serif" font-size="4" font-weight="700" fill="#bae6fd" text-anchor="middle">CRISPY POTATO CRISPS</text>
+
+    <!-- Chips Graphic in Center -->
+    <circle cx="200" cy="142" r="24" fill="#ca8a04" />
+    <circle cx="200" cy="142" r="22" fill="#eab308" />
+    <path d="M 188 140 Q 200 125 212 138 Q 218 152 200 156 Q 184 152 188 140 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="1" />
+
+    <!-- Flavor Name -->
+    <rect x="164" y="174" width="72" height="18" rx="3" fill="#0f172a" />
+    <text x="200" y="186" font-family="Arial, sans-serif" font-size="6.5" font-weight="900" fill="#38bdf8" text-anchor="middle">CLASSIC SALTED</text>
+
+    <!-- Weight & Pack Badge -->
+    <rect x="175" y="198" width="50" height="9" rx="2" fill="#dc2626" />
+    <text x="200" y="204.5" font-family="Arial, sans-serif" font-size="4.5" font-weight="900" fill="#ffffff" text-anchor="middle">40G NET WEIGHT</text>
+    <text x="200" y="218" font-family="Arial, sans-serif" font-size="3.5" font-weight="800" fill="#713f12" text-anchor="middle">100% FRESH POTATOES</text>
+  </g>
+
+  <!-- Packaging Badge Top Left -->
+  <g transform="translate(16, 16)">
+    <rect x="0" y="0" width="112" height="26" rx="13" fill="#0a0f1d" fill-opacity="0.85" stroke="#facc15" stroke-width="1" />
+    <circle cx="14" cy="13" r="5" fill="#eab308" />
+    <text x="26" y="17" font-family="Arial, sans-serif" font-size="9.5" font-weight="800" fill="#ffffff" letter-spacing="0.3">30-PACK CARTON</text>
+  </g>
+
+  <!-- Watermark -->
+  <g transform="translate(16, 252)">
+    <rect x="0" y="0" width="168" height="28" rx="8" fill="#0f172a" fill-opacity="0.88" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="10" y="13" font-family="Arial, sans-serif" font-size="8.5" font-weight="900" fill="#facc15">AL-FAROOQ FOODS</text>
+    <text x="10" y="23" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">Crispy Chips Salted 40g</text>
+  </g>
+</svg>

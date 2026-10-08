@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03" />
+      <stop offset="50%" stop-color="#92400e" />
+      <stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+
+    <radialGradient id="glow8" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde68a" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#92400e" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Clear Plastic Jar Body with Caramel Fill -->
+    <linearGradient id="jarGlass" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.8" />
+      <stop offset="25%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="60%" stop-color="#fef3c7" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Gold Foil Toffee Wrapper Gradient -->
+    <linearGradient id="goldFoil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <!-- Red Jar Lid -->
+    <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#991b1b" />
+      <stop offset="35%" stop-color="#ef4444" />
+      <stop offset="70%" stop-color="#dc2626" />
+      <stop offset="100%" stop-color="#7f1d1d" />
+    </linearGradient>
+
+    <filter id="shadow8" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrad8)" />
+  <circle cx="200" cy="140" r="140" fill="url(#glow8)" />
+  <ellipse cx="200" cy="264" rx="120" ry="18" fill="#000000" opacity="0.45" filter="url(#shadow8)" />
+
+  <!-- A couple of loose gold-wrapped toffees on podium foreground -->
+  <g transform="translate(105, 235) rotate(-10)">
+    <!-- Twisted ends -->
+    <path d="M 0 10 L 8 14 L 0 18 Z" fill="url(#goldFoil)" />
+    <ellipse cx="18" cy="14" rx="11" ry="7" fill="url(#goldFoil)" />
+    <path d="M 36 10 L 28 14 L 36 18 Z" fill="url(#goldFoil)" />
+  </g>
+  <g transform="translate(255, 238) rotate(15)">
+    <path d="M 0 10 L 8 14 L 0 18 Z" fill="url(#goldFoil)" />
+    <ellipse cx="18" cy="14" rx="11" ry="7" fill="url(#goldFoil)" />
+    <path d="M 36 10 L 28 14 L 36 18 Z" fill="url(#goldFoil)" />
+  </g>
+
+  <!-- 1KG CONFECTIONERY DISPLAY JAR -->
+  <g filter="url(#shadow8)">
+    <!-- Clear Plastic Jar Body with Caramel Candies inside -->
+    <rect x="146" y="85" width="108" height="155" rx="16" fill="#fef3c7" fill-opacity="0.25" />
+    <rect x="148" y="87" width="104" height="151" rx="15" fill="#fef08a" fill-opacity="0.15" />
+
+    <!-- Pile of wrapped candies visible inside jar -->
+    <ellipse cx="170" cy="130" rx="14" ry="9" fill="url(#goldFoil)" />
+    <ellipse cx="205" cy="125" rx="15" ry="9" fill="#f97316" />
+    <ellipse cx="230" cy="135" rx="13" ry="8" fill="url(#goldFoil)" />
+
+    <ellipse cx="165" cy="165" rx="15" ry="10" fill="#f59e0b" />
+    <ellipse cx="200" cy="160" rx="16" ry="10" fill="url(#goldFoil)" />
+    <ellipse cx="232" cy="168" rx="14" ry="9" fill="#ea580c" />
+
+    <ellipse cx="175" cy="205" rx="16" ry="10" fill="url(#goldFoil)" />
+    <ellipse cx="210" cy="210" rx="17" ry="10" fill="#f59e0b" />
+    <ellipse cx="235" cy="202" rx="13" ry="9" fill="url(#goldFoil)" />
+
+    <!-- Jar Glass Outer Shell & Specular Glare -->
+    <rect x="146" y="85" width="108" height="155" rx="16" fill="url(#jarGlass)" fill-opacity="0.2" stroke="#ffffff" stroke-width="1.5" />
+    <path d="M 152 95 L 152 230 Q 152 236 149 236 L 148 236 Q 148 95 152 95 Z" fill="#ffffff" opacity="0.8" />
+
+    <!-- Prominent Royal Milk Toffee Label Band -->
+    <rect x="150" y="145" width="100" height="58" rx="6" fill="#78350f" fill-opacity="0.96" stroke="#fef08a" stroke-width="1.2" />
+    <text x="200" y="160" font-family="Arial, sans-serif" font-size="6" font-weight="900" fill="#facc15" text-anchor="middle" letter-spacing="0.5">FAROOQ CONFECTIONERY</text>
+    <text x="200" y="172" font-family="Georgia, serif" font-size="7.5" font-weight="900" fill="#ffffff" text-anchor="middle">ROYAL MILK TOFFEE</text>
+    <rect x="166" y="178" width="68" height="9" rx="3" fill="#ca8a04" />
+    <text x="200" y="184.5" font-family="Arial, sans-serif" font-size="4.5" font-weight="900" fill="#451a03" text-anchor="middle">1KG DISPLAY JAR</text>
+    <text x="200" y="196" font-family="Arial, sans-serif" font-size="3.2" fill="#fef08a" font-weight="600" text-anchor="middle">RICH CREAMY CARAMEL</text>
+
+    <!-- Screw Lid -->
+    <rect x="142" y="66" width="116" height="22" rx="5" fill="url(#lidGrad)" />
+    <!-- Lid Ridges -->
+    <line x1="148" y1="68" x2="148" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <line x1="156" y1="68" x2="156" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <line x1="164" y1="68" x2="164" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <line x1="200" y1="68" x2="200" y2="86" stroke="#fca5a5" stroke-width="1.5" />
+    <line x1="236" y1="68" x2="236" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <line x1="244" y1="68" x2="244" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <line x1="252" y1="68" x2="252" y2="86" stroke="#7f1d1d" stroke-width="1.5" />
+    <rect x="144" y="66" width="112" height="3" rx="1.5" fill="#fca5a5" opacity="0.8" />
+  </g>
+
+  <!-- Packaging Badge Top Left -->
+  <g transform="translate(16, 16)">
+    <rect x="0" y="0" width="112" height="26" rx="13" fill="#0a0f1d" fill-opacity="0.85" stroke="#f59e0b" stroke-width="1" />
+    <circle cx="14" cy="13" r="5" fill="#ca8a04" />
+    <text x="26" y="17" font-family="Arial, sans-serif" font-size="9.5" font-weight="800" fill="#ffffff" letter-spacing="0.3">12 x 1KG JARS</text>
+  </g>
+
+  <!-- Watermark -->
+  <g transform="translate(16, 252)">
+    <rect x="0" y="0" width="156" height="28" rx="8" fill="#0f172a" fill-opacity="0.88" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="10" y="13" font-family="Arial, sans-serif" font-size="8.5" font-weight="900" fill="#facc15">AL-FAROOQ FOODS</text>
+    <text x="10" y="23" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">Royal Milk Toffee 1kg Jar</text>
+  </g>
+</svg>

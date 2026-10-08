@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <radialGradient id="glow5" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fde047" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Rich Chaunsa Mango Nectar Liquid Fill -->
+    <linearGradient id="mangoJuice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="40%" stop-color="#facc15" />
+      <stop offset="80%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <!-- Tetra Pack Carton Body -->
+    <linearGradient id="cartonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="25%" stop-color="#f59e0b" />
+      <stop offset="60%" stop-color="#fbbf24" />
+      <stop offset="85%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+
+    <filter id="shadow5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrad5)" />
+  <circle cx="200" cy="140" r="140" fill="url(#glow5)" />
+  <ellipse cx="200" cy="260" rx="110" ry="16" fill="#000000" opacity="0.45" filter="url(#shadow5)" />
+
+  <!-- Fresh Chaunsa Mango Slice on Left Base -->
+  <g transform="translate(110, 195) rotate(-15)">
+    <path d="M 0 35 Q 25 -10 65 0 Q 80 20 60 45 Q 25 55 0 35 Z" fill="#eab308" />
+    <path d="M 6 32 Q 26 -2 60 4 Q 72 18 56 38 Q 28 46 6 32 Z" fill="#facc15" />
+    <!-- Mango Skin Rim -->
+    <path d="M 0 35 Q 25 -10 65 0" fill="none" stroke="#65a30d" stroke-width="3.5" />
+    <!-- Fresh Green Leaf -->
+    <path d="M -10 40 Q -25 30 -30 10 Q -15 15 -10 40 Z" fill="#22c55e" />
+  </g>
+
+  <!-- 250ML SLIM JUICE CARTON / PACK -->
+  <g filter="url(#shadow5)">
+    <!-- Main Carton Box -->
+    <rect x="172" y="70" width="56" height="175" rx="5" fill="url(#cartonGrad)" />
+
+    <!-- Carton Top Slanted Gable -->
+    <path d="M 172 70 L 180 54 L 220 54 L 228 70 Z" fill="#f59e0b" />
+    <rect x="194" y="44" width="12" height="12" rx="3" fill="#ffffff" />
+    <!-- Straw Hole Foil Seal -->
+    <circle cx="200" cy="50" r="3.5" fill="#ef4444" />
+
+    <!-- Carton Lighting Sheen -->
+    <path d="M 176 72 L 176 240 Q 176 243 174 243 L 173 243 Q 173 240 173 72 Z" fill="#ffffff" opacity="0.6" />
+
+    <!-- Front Label Artwork on Carton -->
+    <rect x="174" y="90" width="52" height="135" rx="3" fill="#ffffff" fill-opacity="0.12" />
+
+    <!-- Brand Header -->
+    <rect x="176" y="94" width="48" height="18" rx="3" fill="#78350f" />
+    <text x="200" y="104" font-family="Arial, sans-serif" font-size="5" font-weight="900" fill="#facc15" text-anchor="middle" letter-spacing="0.5">AL-FAROOQ</text>
+    <text x="200" y="110" font-family="Arial, sans-serif" font-size="3.5" font-weight="700" fill="#ffffff" text-anchor="middle">PURE FRUIT NECTAR</text>
+
+    <!-- Illustrated Mango Splash Graphic inside pack -->
+    <ellipse cx="200" cy="148" rx="20" ry="18" fill="url(#mangoJuice)" />
+    <path d="M 188 135 Q 200 120 212 135 Q 215 158 200 162 Q 185 158 188 135 Z" fill="#f59e0b" />
+    <text x="200" y="180" font-family="Arial, sans-serif" font-size="5" font-weight="900" fill="#78350f" text-anchor="middle">CHAUNSA</text>
+    <text x="200" y="187" font-family="Arial, sans-serif" font-size="4.5" font-weight="800" fill="#92400e" text-anchor="middle">MANGO NECTAR</text>
+
+    <rect x="182" y="194" width="36" height="8" rx="2" fill="#eab308" />
+    <text x="200" y="200" font-family="Arial, sans-serif" font-size="4" font-weight="800" fill="#451a03" text-anchor="middle">250 ML PACK</text>
+    <text x="200" y="210" font-family="Arial, sans-serif" font-size="3" fill="#78350f" font-weight="700" text-anchor="middle">RICH REAL PULP</text>
+  </g>
+
+  <!-- Fresh Fruit Splash droplets -->
+  <circle cx="242" cy="130" r="3" fill="#fde047" opacity="0.9" />
+  <circle cx="248" cy="145" r="2" fill="#facc15" opacity="0.8" />
+  <circle cx="238" cy="165" r="2.5" fill="#f59e0b" opacity="0.9" />
+
+  <!-- Badge Top Left -->
+  <g transform="translate(16, 16)">
+    <rect x="0" y="0" width="112" height="26" rx="13" fill="#0a0f1d" fill-opacity="0.85" stroke="#f59e0b" stroke-width="1" />
+    <circle cx="14" cy="13" r="5" fill="#eab308" />
+    <text x="26" y="17" font-family="Arial, sans-serif" font-size="9.5" font-weight="800" fill="#ffffff" letter-spacing="0.3">24-PACK CARTON</text>
+  </g>
+
+  <!-- Bottom Watermark -->
+  <g transform="translate(16, 252)">
+    <rect x="0" y="0" width="158" height="28" rx="8" fill="#0f172a" fill-opacity="0.88" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="10" y="13" font-family="Arial, sans-serif" font-size="8.5" font-weight="900" fill="#f59e0b">AL-FAROOQ FOODS</text>
+    <text x="10" y="23" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">Chaunsa Mango Nectar 250ml</text>
+  </g>
+</svg>

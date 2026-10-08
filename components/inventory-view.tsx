@@ -37,6 +37,8 @@ import {
   formatDate,
   fileToBase64,
   defaultRawMaterialCategories,
+  defaultProductImages,
+  defaultCategoryImages,
   type AppDatabase,
   type ProductItem,
   type RawMaterialItem,
@@ -376,6 +378,69 @@ export default function InventoryView({ db, activeSubView, onSaveDatabase }: Inv
         </div>
       </div>
 
+      {/* Category Visual Navigation Strip */}
+      {activeSubView === 'products' && (
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="category-visual-strip">
+          <button
+            type="button"
+            onClick={() => setCategoryFilter('All')}
+            className={`flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 cursor-pointer ${
+              categoryFilter === 'All'
+                ? 'bg-stone-900 text-white border-stone-900 shadow-xs'
+                : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
+            }`}
+            id="category-pill-all"
+          >
+            <div className="w-8 h-8 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700 font-extrabold text-[11px] border border-stone-200/60 flex-shrink-0">
+              <Package className="w-4 h-4 text-stone-600" />
+            </div>
+            <div className="text-left">
+              <div className="leading-tight">All Products</div>
+              <div className={`text-[10px] font-normal ${categoryFilter === 'All' ? 'text-stone-300' : 'text-stone-400'}`}>
+                {db.products.length} items
+              </div>
+            </div>
+          </button>
+
+          {categories.map((c) => {
+            const isSelected = categoryFilter === c.name
+            const catImg = c.imageUrl || defaultCategoryImages[c.id] || defaultCategoryImages[c.name]
+            const count = categoryCounts[c.name] || 0
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setCategoryFilter(c.name)}
+                className={`group flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex-shrink-0 cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#7cb518] text-white border-[#7cb518] shadow-xs ring-2 ring-[#7cb518]/20'
+                    : 'bg-white text-stone-700 border-stone-200 hover:border-stone-300 hover:bg-stone-50'
+                }`}
+                id={`category-pill-${c.id}`}
+              >
+                <div className="w-8 h-8 rounded-lg overflow-hidden bg-stone-100 border border-stone-200/60 flex-shrink-0 relative flex items-center justify-center">
+                  <Tag className="w-4 h-4 text-stone-400 absolute inset-0 m-auto" />
+                  {catImg && (
+                    <img
+                      src={catImg}
+                      alt={c.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200 relative z-1"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    />
+                  )}
+                </div>
+                <div className="text-left">
+                  <div className="leading-tight">{c.name}</div>
+                  <div className={`text-[10px] font-normal ${isSelected ? 'text-white/80' : 'text-stone-400'}`}>
+                    {count} {count === 1 ? 'item' : 'items'}
+                  </div>
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      )}
+
       {/* Toolbar & Multi-Filters */}
       <div className="bg-white p-3.5 rounded-xl border border-stone-200 shadow-xs flex flex-wrap items-center justify-between gap-3" id="products-toolbar">
         <div className="flex items-center gap-2 flex-1 min-w-[240px]">
@@ -511,18 +576,26 @@ export default function InventoryView({ db, activeSubView, onSaveDatabase }: Inv
                     {/* Top Section: Image & Overlaid Badges */}
                     <div>
                       <div className="w-full aspect-[4/3] rounded-xl bg-stone-100 overflow-hidden relative flex items-center justify-center mb-3">
-                        {p.imageUrl ? (
+                        <div className="w-full h-full flex flex-col items-center justify-center text-stone-300 gap-1 absolute inset-0">
+                          <Package className="w-10 h-10 stroke-[1.5]" />
+                          <span className="text-[10px] font-medium text-stone-400">No Image</span>
+                        </div>
+                        {(p.imageUrl || defaultProductImages[p.id]) && (
                           <img
-                            src={p.imageUrl}
+                            src={p.imageUrl || defaultProductImages[p.id]}
                             alt={p.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 relative z-1"
                             loading="lazy"
+                            onError={(e) => {
+                              const target = e.currentTarget
+                              const fallback = defaultProductImages[p.id]
+                              if (fallback && !target.src.includes(fallback)) {
+                                target.src = fallback
+                              } else {
+                                target.style.display = 'none'
+                              }
+                            }}
                           />
-                        ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center text-stone-300 gap-1">
-                            <Package className="w-10 h-10 stroke-[1.5]" />
-                            <span className="text-[10px] font-medium text-stone-400">No Image</span>
-                          </div>
                         )}
 
                         {/* Top-Right Action Buttons */}
@@ -586,7 +659,15 @@ export default function InventoryView({ db, activeSubView, onSaveDatabase }: Inv
 
                       {/* Category Pill & SKU */}
                       <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <span className="inline-block bg-emerald-50 text-emerald-800 font-semibold text-[10px] px-2 py-0.5 rounded-md">
+                        <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 font-semibold text-[10px] px-2 py-0.5 rounded-md border border-emerald-200/50">
+                          {defaultCategoryImages[p.category] && (
+                            <img
+                              src={defaultCategoryImages[p.category]}
+                              alt=""
+                              className="w-3 h-3 rounded object-cover"
+                              onError={(e) => { e.currentTarget.style.display = 'none' }}
+                            />
+                          )}
                           {p.category}
                         </span>
                         <div className="flex items-center gap-1">
@@ -1055,7 +1136,9 @@ function ProductEditorModal({
   )
 
   // Product Image
-  const [imageUrl, setImageUrl] = useState<string>(product?.imageUrl || '')
+  const [imageUrl, setImageUrl] = useState<string>(
+    product?.imageUrl || (product?.id ? defaultProductImages[product.id] : '') || ''
+  )
   const imageFileInputRef = useRef<HTMLInputElement>(null)
 
   // Sourcing & Purchase Invoice
@@ -1654,11 +1737,23 @@ function ProductDetailsModal({
       <div className="editor-modal large" id="product-details-modal">
         <div className="editor-header">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gray-100 border border-gray-200 overflow-hidden flex items-center justify-center flex-shrink-0">
-              {product.imageUrl ? (
-                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
-              ) : (
-                <Package className="w-6 h-6 text-[#7cb518]" />
+            <div className="w-12 h-12 rounded-xl bg-gray-100 border border-gray-200 overflow-hidden flex items-center justify-center flex-shrink-0 relative">
+              <Package className="w-6 h-6 text-[#7cb518] absolute inset-0 m-auto" />
+              {(product.imageUrl || defaultProductImages[product.id]) && (
+                <img
+                  src={product.imageUrl || defaultProductImages[product.id]}
+                  alt={product.name}
+                  className="w-full h-full object-cover relative z-1"
+                  onError={(e) => {
+                    const target = e.currentTarget
+                    const fallback = defaultProductImages[product.id]
+                    if (fallback && !target.src.includes(fallback)) {
+                      target.src = fallback
+                    } else {
+                      target.style.display = 'none'
+                    }
+                  }}
+                />
               )}
             </div>
             <div>
@@ -1763,11 +1858,23 @@ function ProductDetailsModal({
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-gray-50 p-2 rounded-lg border border-gray-200 text-center">
                   <div className="text-[11px] font-semibold text-gray-600 mb-1">Product Photo</div>
-                  <div className="w-full h-28 rounded bg-gray-100 overflow-hidden flex items-center justify-center border border-gray-200">
-                    {product.imageUrl ? (
-                      <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="text-[11px] text-gray-400">No Image</span>
+                  <div className="w-full h-28 rounded bg-gray-100 overflow-hidden flex items-center justify-center border border-gray-200 relative">
+                    <span className="text-[11px] text-gray-400 absolute inset-0 flex items-center justify-center">No Image</span>
+                    {(product.imageUrl || defaultProductImages[product.id]) && (
+                      <img
+                        src={product.imageUrl || defaultProductImages[product.id]}
+                        alt={product.name}
+                        className="w-full h-full object-cover relative z-1"
+                        onError={(e) => {
+                          const target = e.currentTarget
+                          const fallback = defaultProductImages[product.id]
+                          if (fallback && !target.src.includes(fallback)) {
+                            target.src = fallback
+                          } else {
+                            target.style.display = 'none'
+                          }
+                        }}
+                      />
                     )}
                   </div>
                 </div>
@@ -2062,21 +2169,35 @@ function CategoryManagerModal({
           ) : (
             categories.map((c) => {
               const count = counts[c.name] || 0
+              const catImg = c.imageUrl || defaultCategoryImages[c.id] || defaultCategoryImages[c.name]
               return (
                 <div
                   key={c.id}
                   className="p-3.5 flex items-center justify-between hover:bg-stone-50/80 transition-colors"
                 >
-                  <div className="pr-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-xs text-stone-900">{c.name}</span>
-                      <span className="text-[10px] bg-emerald-50 text-emerald-800 font-semibold px-2 py-0.5 rounded-md border border-emerald-200/50">
-                        {count} {count === 1 ? 'product' : 'products'}
-                      </span>
+                  <div className="flex items-center gap-3 pr-2">
+                    <div className="w-12 h-9 rounded-lg bg-stone-100 border border-stone-200 overflow-hidden flex items-center justify-center flex-shrink-0 relative">
+                      <Tag className="w-4 h-4 text-stone-400 absolute inset-0 m-auto" />
+                      {catImg && (
+                        <img
+                          src={catImg}
+                          alt={c.name}
+                          className="w-full h-full object-cover relative z-1"
+                          onError={(e) => { e.currentTarget.style.display = 'none' }}
+                        />
+                      )}
                     </div>
-                    {c.description && (
-                      <p className="text-[11px] text-stone-500 mt-0.5">{c.description}</p>
-                    )}
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-xs text-stone-900">{c.name}</span>
+                        <span className="text-[10px] bg-emerald-50 text-emerald-800 font-semibold px-2 py-0.5 rounded-md border border-emerald-200/50">
+                          {count} {count === 1 ? 'product' : 'products'}
+                        </span>
+                      </div>
+                      {c.description && (
+                        <p className="text-[11px] text-stone-500 mt-0.5">{c.description}</p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="flex items-center gap-1">

@@ -28,6 +28,7 @@ import {
   formatDate,
   fileToBase64,
   defaultRawMaterialCategories,
+  defaultRawMaterialImages,
   type AppDatabase,
   type RawMaterialItem,
   type RawMaterialCategory,
@@ -556,9 +557,9 @@ export default function RawMaterialsView({
                   {/* Top Section: Image & Overlaid Badges */}
                   <div>
                     <div className="w-full aspect-[4/3] rounded-xl bg-stone-100 overflow-hidden relative flex items-center justify-center mb-3">
-                      {r.imageUrl ? (
+                      {r.imageUrl || defaultRawMaterialImages[r.id] ? (
                         <img
-                          src={r.imageUrl}
+                          src={r.imageUrl || defaultRawMaterialImages[r.id]}
                           alt={r.name}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
@@ -1184,7 +1185,9 @@ function RawMaterialEditorModal({
     material?.category || categories[0]?.name || 'Ingredients'
   )
   const [description, setDescription] = useState(material?.description || '')
-  const [imageUrl, setImageUrl] = useState(material?.imageUrl || '')
+  const [imageUrl, setImageUrl] = useState(
+    material?.imageUrl || (material?.id ? defaultRawMaterialImages[material.id] : '') || ''
+  )
   const [size, setSize] = useState(material?.size || '')
   const [unit, setUnit] = useState(material?.unit || 'kg')
 
@@ -1812,8 +1815,12 @@ function RawMaterialDetailsModal({
         <div className="editor-header">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-xl bg-stone-100 border border-stone-200 overflow-hidden flex items-center justify-center flex-shrink-0">
-              {material.imageUrl ? (
-                <img src={material.imageUrl} alt={material.name} className="w-full h-full object-cover" />
+              {material.imageUrl || defaultRawMaterialImages[material.id] ? (
+                <img
+                  src={material.imageUrl || defaultRawMaterialImages[material.id]}
+                  alt={material.name}
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <Boxes className="w-6 h-6 text-[#7cb518]" />
               )}

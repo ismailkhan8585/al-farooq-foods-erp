@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -9,6 +12,3 @@ const nextConfig = {
 }
 
 export default nextConfig
-
-
-

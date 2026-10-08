@@ -38,6 +38,7 @@ export interface CategoryItem {
   name: string
   description?: string
   color?: string
+  imageUrl?: string
   createdAt?: string
 }
 
@@ -583,14 +584,63 @@ export const defaultRawMaterialCategories: CategoryItem[] = [
   { id: 'rmcat-4', name: 'Flavors', color: 'purple', description: 'Food grade flavors, seasonings, essences & aromas', createdAt: '2026-08-01' },
 ]
 
+export const defaultRawMaterialImages: Record<string, string> = {
+  'raw-1': '/raw-materials/raw-1.jpg',
+  'raw-2': '/raw-materials/raw-2.jpg',
+  'raw-3': '/raw-materials/raw-3.jpg',
+  'raw-4': '/raw-materials/raw-4.jpg',
+  'raw-5': '/raw-materials/raw-5.jpg',
+  'raw-6': '/raw-materials/raw-6.jpg',
+  'raw-7': '/raw-materials/raw-7.jpg',
+  'raw-8': '/raw-materials/raw-8.jpg',
+  'raw-9': '/raw-materials/raw-9.jpg',
+  'raw-10': '/raw-materials/raw-10.jpg',
+  'raw-11': '/raw-materials/raw-11.jpg',
+  'raw-12': '/raw-materials/raw-12.jpg',
+  'raw-13': '/raw-materials/raw-13.jpg',
+  'raw-14': '/raw-materials/raw-14.jpg',
+}
+
+export const defaultProductImages: Record<string, string> = {
+  'prod-1': '/products/prod-1.svg',
+  'prod-2': '/products/prod-2.svg',
+  'prod-3': '/products/prod-3.svg',
+  'prod-4': '/products/prod-4.svg',
+  'prod-5': '/products/prod-5.svg',
+  'prod-6': '/products/prod-6.svg',
+  'prod-7': '/products/prod-7.svg',
+  'prod-8': '/products/prod-8.svg',
+  'prod-9': '/products/prod-9.svg',
+  'prod-10': '/products/prod-10.svg',
+  'prod-11': '/products/prod-11.svg',
+}
+
+export const defaultCategoryImages: Record<string, string> = {
+  'cat-1': '/categories/cat-1.svg',
+  'cat-2': '/categories/cat-2.svg',
+  'cat-3': '/categories/cat-3.svg',
+  'cat-4': '/categories/cat-4.svg',
+  'cat-5': '/categories/cat-5.svg',
+  'cat-6': '/categories/cat-6.svg',
+  'cat-7': '/categories/cat-7.svg',
+  'Mineral Water': '/categories/cat-1.svg',
+  'Fruit Juice': '/categories/cat-2.svg',
+  'Candy & Toffee': '/categories/cat-3.svg',
+  'Potato Chips': '/categories/cat-4.svg',
+  'Snacks & Chips': '/categories/cat-4.svg',
+  'Snacks & Savories': '/categories/cat-5.svg',
+  'Carbonated Beverages': '/categories/cat-6.svg',
+  'Other': '/categories/cat-7.svg',
+}
+
 export const defaultProductCategories: CategoryItem[] = [
-  { id: 'cat-1', name: 'Mineral Water', description: 'Purified mineral water in bottles & gallons', createdAt: '2026-08-01' },
-  { id: 'cat-2', name: 'Fruit Juice', description: 'Mango, Apple, Guava, Orange juices & nectars', createdAt: '2026-08-01' },
-  { id: 'cat-3', name: 'Candy & Toffee', description: 'Milk toffees, fruit chews, candies, lollipops', createdAt: '2026-08-01' },
-  { id: 'cat-4', name: 'Potato Chips', description: 'Crispy potato crisps & wavy chips', createdAt: '2026-08-01' },
-  { id: 'cat-5', name: 'Snacks & Savories', description: 'Extruded snacks, corn puffs, nimko packs', createdAt: '2026-08-01' },
-  { id: 'cat-6', name: 'Carbonated Beverages', description: 'Refreshing sparkling drinks & sodas', createdAt: '2026-08-01' },
-  { id: 'cat-7', name: 'Other', description: 'General merchandise and new trial products', createdAt: '2026-08-01' },
+  { id: 'cat-1', name: 'Mineral Water', imageUrl: '/categories/cat-1.svg', description: 'Purified mineral water in bottles & gallons', createdAt: '2026-08-01' },
+  { id: 'cat-2', name: 'Fruit Juice', imageUrl: '/categories/cat-2.svg', description: 'Mango, Apple, Guava, Orange juices & nectars', createdAt: '2026-08-01' },
+  { id: 'cat-3', name: 'Candy & Toffee', imageUrl: '/categories/cat-3.svg', description: 'Milk toffees, fruit chews, candies, lollipops', createdAt: '2026-08-01' },
+  { id: 'cat-4', name: 'Potato Chips', imageUrl: '/categories/cat-4.svg', description: 'Crispy potato crisps & wavy chips', createdAt: '2026-08-01' },
+  { id: 'cat-5', name: 'Snacks & Savories', imageUrl: '/categories/cat-5.svg', description: 'Extruded snacks, corn puffs, nimko packs', createdAt: '2026-08-01' },
+  { id: 'cat-6', name: 'Carbonated Beverages', imageUrl: '/categories/cat-6.svg', description: 'Refreshing sparkling drinks & sodas', createdAt: '2026-08-01' },
+  { id: 'cat-7', name: 'Other', imageUrl: '/categories/cat-7.svg', description: 'General merchandise and new trial products', createdAt: '2026-08-01' },
 ]
 
 export const defaultCustomerCategories: CustomerCategoryItem[] = [
@@ -635,6 +685,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Mineral Water 500ml (24-pack)',
       category: 'Mineral Water',
       sku: 'AFW-500-24',
+      imageUrl: '/products/prod-1.svg',
       quantity: 380,
       unit: 'Cartons',
       costPrice: 380,
@@ -650,6 +701,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Mineral Water 1.5L (12-pack)',
       category: 'Mineral Water',
       sku: 'AFW-1500-12',
+      imageUrl: '/products/prod-2.svg',
       quantity: 240,
       unit: 'Cartons',
       costPrice: 420,
@@ -665,6 +717,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Mineral Water 6L Family Bottle',
       category: 'Mineral Water',
       sku: 'AFW-6000-1',
+      imageUrl: '/products/prod-3.svg',
       quantity: 160,
       unit: 'Bottles',
       costPrice: 140,
@@ -680,6 +733,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq 19L Dispenser Bottle (Refill)',
       category: 'Mineral Water',
       sku: 'AFW-19L-GAL',
+      imageUrl: '/products/prod-4.svg',
       quantity: 85,
       unit: 'Bottles',
       costPrice: 65,
@@ -695,6 +749,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Chaunsa Mango Nectar 250ml (24-pack)',
       category: 'Fruit Juice',
       sku: 'AFJ-MNG-250',
+      imageUrl: '/products/prod-5.svg',
       quantity: 420,
       unit: 'Cartons',
       costPrice: 780,
@@ -710,6 +765,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Red Apple Juice 250ml (24-pack)',
       category: 'Fruit Juice',
       sku: 'AFJ-APL-250',
+      imageUrl: '/products/prod-6.svg',
       quantity: 290,
       unit: 'Cartons',
       costPrice: 810,
@@ -725,6 +781,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Al-Farooq Guava Fruit Nectar 250ml (24-pack)',
       category: 'Fruit Juice',
       sku: 'AFJ-GVA-250',
+      imageUrl: '/products/prod-7.svg',
       quantity: 195,
       unit: 'Cartons',
       costPrice: 760,
@@ -740,6 +797,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Farooq Royal Milk Toffee (1kg Jar x 12)',
       category: 'Candy & Toffee',
       sku: 'AFT-MLK-12',
+      imageUrl: '/products/prod-8.svg',
       quantity: 95,
       unit: 'Cartons',
       costPrice: 2100,
@@ -755,6 +813,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Farooq Butter Candy Roll (72-pack Dispenser)',
       category: 'Candy & Toffee',
       sku: 'AFC-BTR-72',
+      imageUrl: '/products/prod-9.svg',
       quantity: 140,
       unit: 'Boxes',
       costPrice: 850,
@@ -770,6 +829,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Farooq Crispy Potato Chips Salted 40g (30-pack)',
       category: 'Snacks & Chips',
       sku: 'AFS-CHP-SLT',
+      imageUrl: '/products/prod-10.svg',
       quantity: 180,
       unit: 'Cartons',
       costPrice: 920,
@@ -785,6 +845,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Farooq Masala Crinkle Chips 40g (30-pack)',
       category: 'Snacks & Chips',
       sku: 'AFS-CHP-MSL',
+      imageUrl: '/products/prod-11.svg',
       quantity: 35,
       unit: 'Cartons',
       costPrice: 940,
@@ -802,6 +863,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Refined White Sugar (Food Grade A)',
       category: 'Ingredients',
       sku: 'RAW-SGR-01',
+      imageUrl: '/raw-materials/raw-1.jpg',
       quantity: 2600,
       unit: 'kg',
       unitCost: 145,
@@ -816,6 +878,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Premium Chaunsa Mango Pulp Aseptic',
       category: 'Ingredients',
       sku: 'RAW-MNG-02',
+      imageUrl: '/raw-materials/raw-2.jpg',
       quantity: 1450,
       unit: 'kg',
       unitCost: 320,
@@ -830,6 +893,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Apple Juice Concentrate 70° Brix',
       category: 'Ingredients',
       sku: 'RAW-APL-03',
+      imageUrl: '/raw-materials/raw-3.jpg',
       quantity: 920,
       unit: 'kg',
       unitCost: 480,
@@ -844,6 +908,7 @@ export const initialDatabase: AppDatabase = {
       name: 'PET Preforms 500ml (28mm Neck)',
       category: 'Packaging',
       sku: 'RAW-PET-500',
+      imageUrl: '/raw-materials/raw-4.jpg',
       quantity: 16500,
       unit: 'Pcs',
       unitCost: 6.5,
@@ -858,6 +923,7 @@ export const initialDatabase: AppDatabase = {
       name: 'PET Preforms 1.5L (30mm Neck)',
       category: 'Packaging',
       sku: 'RAW-PET-1500',
+      imageUrl: '/raw-materials/raw-5.jpg',
       quantity: 9800,
       unit: 'Pcs',
       unitCost: 11.2,
@@ -872,6 +938,7 @@ export const initialDatabase: AppDatabase = {
       name: '28mm HDPE Bottling Caps (Tamper Evident)',
       category: 'Packaging',
       sku: 'RAW-CAP-28',
+      imageUrl: '/raw-materials/raw-6.jpg',
       quantity: 21000,
       unit: 'Pcs',
       unitCost: 2.1,
@@ -886,6 +953,7 @@ export const initialDatabase: AppDatabase = {
       name: 'BOPP Wrap-Around Bottle Labels 500ml',
       category: 'Packaging',
       sku: 'RAW-LBL-500',
+      imageUrl: '/raw-materials/raw-7.jpg',
       quantity: 18400,
       unit: 'Pcs',
       unitCost: 1.8,
@@ -900,6 +968,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Corrugated Master Cartons (24-pack Water)',
       category: 'Packaging',
       sku: 'RAW-BOX-WTR',
+      imageUrl: '/raw-materials/raw-8.jpg',
       quantity: 1550,
       unit: 'Pcs',
       unitCost: 45,
@@ -914,6 +983,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Corrugated Master Cartons (Juice 24-pack)',
       category: 'Packaging',
       sku: 'RAW-BOX-JCE',
+      imageUrl: '/raw-materials/raw-9.jpg',
       quantity: 1300,
       unit: 'Pcs',
       unitCost: 52,
@@ -928,6 +998,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Purified RO Water Minerals Premix',
       category: 'Chemicals & Minerals',
       sku: 'RAW-MIN-01',
+      imageUrl: '/raw-materials/raw-10.jpg',
       quantity: 180,
       unit: 'kg',
       unitCost: 450,
@@ -942,6 +1013,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Food Grade Citric Acid Monohydrate',
       category: 'Ingredients',
       sku: 'RAW-CIT-01',
+      imageUrl: '/raw-materials/raw-11.jpg',
       quantity: 260,
       unit: 'kg',
       unitCost: 380,
@@ -956,6 +1028,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Fresh Potato Slices / Flakes for Chips',
       category: 'Ingredients',
       sku: 'RAW-POT-01',
+      imageUrl: '/raw-materials/raw-12.jpg',
       quantity: 450,
       unit: 'kg',
       unitCost: 85,
@@ -970,6 +1043,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Refined Edible Frying Oil',
       category: 'Ingredients',
       sku: 'RAW-OIL-01',
+      imageUrl: '/raw-materials/raw-13.jpg',
       quantity: 820,
       unit: 'Liters',
       unitCost: 420,
@@ -984,6 +1058,7 @@ export const initialDatabase: AppDatabase = {
       name: 'Special Chatpata Masala Seasoning',
       category: 'Flavors',
       sku: 'RAW-MSL-01',
+      imageUrl: '/raw-materials/raw-14.jpg',
       quantity: 65,
       unit: 'kg',
       unitCost: 650,
@@ -2926,10 +3001,16 @@ export function loadDatabase(): AppDatabase {
       updated = true
     }
 
-    // Ensure all products have totalCost and wholesaleMinQty if not set
+    // Ensure all products have totalCost, wholesaleMinQty, and default images
     parsed.products = parsed.products.map((p) => {
       let mod = false
       const copy = { ...p }
+      if ((!copy.imageUrl || !copy.imageUrl.startsWith('data:')) && defaultProductImages[copy.id]) {
+        if (copy.imageUrl !== defaultProductImages[copy.id]) {
+          copy.imageUrl = defaultProductImages[copy.id]
+          mod = true
+        }
+      }
       if (copy.totalCost === undefined) {
         copy.totalCost = copy.quantity * copy.costPrice
         mod = true
@@ -2942,11 +3023,34 @@ export function loadDatabase(): AppDatabase {
       return copy
     })
 
-    // Ensure all raw materials have normalized cost & total tracking fields
+    // Ensure all categories have default image
+    if (parsed.categories && Array.isArray(parsed.categories)) {
+      parsed.categories = parsed.categories.map((c) => {
+        let mod = false
+        const copy = { ...c }
+        const targetImg = defaultCategoryImages[copy.id] || defaultCategoryImages[copy.name]
+        if ((!copy.imageUrl || !copy.imageUrl.startsWith('data:')) && targetImg) {
+          if (copy.imageUrl !== targetImg) {
+            copy.imageUrl = targetImg
+            mod = true
+          }
+        }
+        if (mod) updated = true
+        return copy
+      })
+    }
+
+    // Ensure all raw materials have normalized cost & total tracking fields and default images
     if (parsed.rawMaterials && Array.isArray(parsed.rawMaterials)) {
       parsed.rawMaterials = parsed.rawMaterials.map((r) => {
         let mod = false
         const copy = { ...r }
+        if ((!copy.imageUrl || !copy.imageUrl.startsWith('data:')) && defaultRawMaterialImages[copy.id]) {
+          if (copy.imageUrl !== defaultRawMaterialImages[copy.id]) {
+            copy.imageUrl = defaultRawMaterialImages[copy.id]
+            mod = true
+          }
+        }
         if (copy.otherCost === undefined) {
           copy.otherCost = 0
           mod = true

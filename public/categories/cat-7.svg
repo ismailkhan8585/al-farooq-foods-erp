@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="catBg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <radialGradient id="catGlow7" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#334155" stop-opacity="0" />
+    </radialGradient>
+    <filter id="catShadow7" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#catBg7)" />
+  <circle cx="200" cy="130" r="130" fill="url(#catGlow7)" />
+  <ellipse cx="200" cy="245" rx="100" ry="14" fill="#000000" opacity="0.35" filter="url(#catShadow7)" />
+
+  <!-- Packaged Goods & Retail Warehouse Package Artwork -->
+  <g filter="url(#catShadow7)">
+    <!-- Central Modern Retail Box -->
+    <polygon points="160,110 200,90 240,110 200,130" fill="#64748b" />
+    <polygon points="160,110 200,130 200,185 160,165" fill="#475569" />
+    <polygon points="240,110 200,130 200,185 240,165" fill="#334155" />
+
+    <!-- Packaging Tape Band -->
+    <polygon points="175,102 200,90 225,102 200,115" fill="#e2e8f0" opacity="0.6" />
+
+    <!-- Secondary Stacked Carton Behind -->
+    <g transform="translate(45, -20) scale(0.75)" opacity="0.7">
+      <polygon points="160,110 200,90 240,110 200,130" fill="#94a3b8" />
+      <polygon points="160,110 200,130 200,185 160,165" fill="#64748b" />
+      <polygon points="240,110 200,130 200,185 240,165" fill="#475569" />
+    </g>
+
+    <!-- Tag & Barcode on Box -->
+    <rect x="208" y="145" width="22" height="14" rx="2" fill="#ffffff" />
+    <line x1="212" y1="148" x2="212" y2="155" stroke="#000000" stroke-width="1" />
+    <line x1="215" y1="148" x2="215" y2="155" stroke="#000000" stroke-width="1.5" />
+    <line x1="219" y1="148" x2="219" y2="155" stroke="#000000" stroke-width="1" />
+    <line x1="223" y1="148" x2="223" y2="155" stroke="#000000" stroke-width="1.8" />
+  </g>
+
+  <!-- Title Pill -->
+  <g transform="translate(16, 240)">
+    <rect x="0" y="0" width="168" height="42" rx="10" fill="#0f172a" fill-opacity="0.9" stroke="#94a3b8" stroke-width="1.2" />
+    <text x="14" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ffffff" letter-spacing="0.5">OTHER / GENERAL</text>
+    <text x="14" y="32" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#94a3b8">Trial &amp; Packaged Merchandise</text>
+  </g>
+</svg>

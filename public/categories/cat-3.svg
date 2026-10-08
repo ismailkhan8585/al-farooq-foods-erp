@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="catBg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451a03" />
+      <stop offset="50%" stop-color="#92400e" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <radialGradient id="catGlow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#92400e" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="candyFoil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+    <filter id="catShadow3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#catBg3)" />
+  <circle cx="200" cy="130" r="130" fill="url(#catGlow3)" />
+  <ellipse cx="200" cy="245" rx="100" ry="14" fill="#000000" opacity="0.35" filter="url(#catShadow3)" />
+
+  <!-- Gourmet Confectionery Artwork -->
+  <g filter="url(#catShadow3)">
+    <!-- Swirl of Creamy Caramel in Center -->
+    <ellipse cx="200" cy="130" rx="35" ry="24" fill="#ca8a04" />
+    <ellipse cx="200" cy="130" rx="28" ry="18" fill="#f59e0b" />
+    <ellipse cx="200" cy="130" rx="18" ry="10" fill="#fde047" />
+
+    <!-- Wrapped Toffee 1 (Gold Foil) -->
+    <g transform="translate(130, 95) rotate(-25)">
+      <path d="M 0 15 L 14 20 L 0 25 Z" fill="url(#candyFoil)" />
+      <ellipse cx="28" cy="20" rx="18" ry="12" fill="url(#candyFoil)" />
+      <path d="M 56 15 L 42 20 L 56 25 Z" fill="url(#candyFoil)" />
+    </g>
+
+    <!-- Wrapped Sweet 2 (Ruby Red Twist) -->
+    <g transform="translate(240, 110) rotate(20)">
+      <path d="M 0 15 L 14 20 L 0 25 Z" fill="#ef4444" />
+      <ellipse cx="28" cy="20" rx="18" ry="12" fill="#dc2626" />
+      <path d="M 56 15 L 42 20 L 56 25 Z" fill="#ef4444" />
+    </g>
+
+    <!-- Butter Candy Roll in Foreground -->
+    <g transform="translate(155, 175) rotate(-5)">
+      <rect x="0" y="0" width="90" height="24" rx="8" fill="url(#candyFoil)" stroke="#78350f" stroke-width="1.2" />
+      <text x="45" y="16" font-family="Arial, sans-serif" font-size="7.5" font-weight="900" fill="#78350f" text-anchor="middle" letter-spacing="1">BUTTER CANDY</text>
+    </g>
+
+    <!-- Sparkles -->
+    <circle cx="120" cy="80" r="3" fill="#fef08a" />
+    <circle cx="280" cy="90" r="3.5" fill="#fef08a" />
+    <circle cx="200" cy="65" r="2.5" fill="#ffffff" />
+  </g>
+
+  <!-- Title Pill -->
+  <g transform="translate(16, 240)">
+    <rect x="0" y="0" width="168" height="42" rx="10" fill="#0f172a" fill-opacity="0.9" stroke="#facc15" stroke-width="1.2" />
+    <text x="14" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="900" fill="#ffffff" letter-spacing="0.5">CANDY &amp; TOFFEE</text>
+    <text x="14" y="32" font-family="Arial, sans-serif" font-size="8" font-weight="600" fill="#facc15">Milk Toffees, Chews &amp; Rolls</text>
+  </g>
+</svg>

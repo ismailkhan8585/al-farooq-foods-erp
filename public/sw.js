@@ -1,12 +1,44 @@
 // Service Worker for AL FAROOQ FOODS - 100% Offline PWA
-const CACHE_NAME = 'al-farooq-foods-v1'
+const CACHE_NAME = 'al-farooq-foods-v3'
 const ASSETS_TO_CACHE = [
   '/',
   '/manifest.webmanifest',
   '/al-farooq-foods-logo.png',
   '/icon-light-32x32.png',
   '/apple-icon.png',
-  '/icon.svg'
+  '/icon.svg',
+  '/products/prod-1.svg',
+  '/products/prod-2.svg',
+  '/products/prod-3.svg',
+  '/products/prod-4.svg',
+  '/products/prod-5.svg',
+  '/products/prod-6.svg',
+  '/products/prod-7.svg',
+  '/products/prod-8.svg',
+  '/products/prod-9.svg',
+  '/products/prod-10.svg',
+  '/products/prod-11.svg',
+  '/categories/cat-1.svg',
+  '/categories/cat-2.svg',
+  '/categories/cat-3.svg',
+  '/categories/cat-4.svg',
+  '/categories/cat-5.svg',
+  '/categories/cat-6.svg',
+  '/categories/cat-7.svg',
+  '/raw-materials/raw-1.jpg',
+  '/raw-materials/raw-2.jpg',
+  '/raw-materials/raw-3.jpg',
+  '/raw-materials/raw-4.jpg',
+  '/raw-materials/raw-5.jpg',
+  '/raw-materials/raw-6.jpg',
+  '/raw-materials/raw-7.jpg',
+  '/raw-materials/raw-8.jpg',
+  '/raw-materials/raw-9.jpg',
+  '/raw-materials/raw-10.jpg',
+  '/raw-materials/raw-11.jpg',
+  '/raw-materials/raw-12.jpg',
+  '/raw-materials/raw-13.jpg',
+  '/raw-materials/raw-14.jpg',
 ]
 
 self.addEventListener('install', (event) => {

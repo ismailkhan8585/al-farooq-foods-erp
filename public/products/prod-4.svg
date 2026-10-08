@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c43" />
+      <stop offset="50%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <radialGradient id="glow4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Heavy Polycarbonate Bottle 19L Body -->
+    <linearGradient id="pcBottle19L" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7dd3fc" stop-opacity="0.75" />
+      <stop offset="20%" stop-color="#bae6fd" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="80%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.7" />
+    </linearGradient>
+
+    <linearGradient id="waterLiquid19L" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.85" />
+    </linearGradient>
+
+    <filter id="shadow4" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <rect width="400" height="300" fill="url(#bgGrad4)" />
+  <circle cx="200" cy="140" r="140" fill="url(#glow4)" />
+  <ellipse cx="200" cy="268" rx="120" ry="18" fill="#000000" opacity="0.48" filter="url(#shadow4)" />
+
+  <!-- 19-LITER (5-GALLON) COMMERCIAL DISPENSER BOTTLE -->
+  <g filter="url(#shadow4)">
+    <!-- Main Polycarbonate Cylinder -->
+    <path d="M 188 50 
+             L 188 75 
+             Q 188 95 142 120 
+             L 142 245 
+             Q 142 258 158 258 
+             L 242 258 
+             Q 258 258 258 245 
+             L 258 120 
+             Q 212 95 212 75 
+             L 212 50 Z" 
+          fill="url(#waterLiquid19L)" />
+
+    <path d="M 188 50 
+             L 188 75 
+             Q 188 95 142 120 
+             L 142 245 
+             Q 142 258 158 258 
+             L 242 258 
+             Q 258 258 258 245 
+             L 258 120 
+             Q 212 95 212 75 
+             L 212 50 Z" 
+          fill="url(#pcBottle19L)" />
+
+    <!-- 5-Gallon Circumferential Reinforcing Ribs -->
+    <rect x="144" y="140" width="112" height="6" rx="3" fill="#0284c7" opacity="0.4" />
+    <rect x="144" y="170" width="112" height="6" rx="3" fill="#0284c7" opacity="0.4" />
+    <rect x="144" y="200" width="112" height="6" rx="3" fill="#0284c7" opacity="0.4" />
+
+    <!-- Left High-Gloss Vertical Sheen -->
+    <path d="M 152 125 L 152 248 Q 152 254 148 254 L 147 254 Q 146 248 147 125 Z" fill="#ffffff" opacity="0.8" />
+
+    <!-- Large Commercial Water Label Embossed Band -->
+    <rect x="156" y="148" width="88" height="52" rx="6" fill="#0f172a" fill-opacity="0.9" />
+    <rect x="158" y="150" width="84" height="48" rx="5" fill="none" stroke="#38bdf8" stroke-width="1.2" />
+    <text x="200" y="165" font-family="Arial, sans-serif" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">AL-FAROOQ</text>
+    <text x="200" y="175" font-family="Arial, sans-serif" font-size="4.5" font-weight="700" fill="#38bdf8" text-anchor="middle">OFFICE &amp; COMMERCIAL</text>
+    <rect x="170" y="179" width="60" height="9" rx="3" fill="#0284c7" />
+    <text x="200" y="185.5" font-family="Arial, sans-serif" font-size="4.5" font-weight="900" fill="#ffffff" text-anchor="middle">19L DISPENSER REFILL</text>
+    <text x="200" y="194" font-family="Arial, sans-serif" font-size="3" fill="#94a3b8" text-anchor="middle">STANDARD 5-GALLON FITTING</text>
+
+    <!-- Hygienic Non-Spill Snap Cap with Tear-Off Ring -->
+    <rect x="186" y="44" width="28" height="12" rx="3" fill="#38bdf8" />
+    <rect x="184" y="52" width="32" height="4" rx="2" fill="#0284c7" />
+    <circle cx="200" cy="48" r="3" fill="#ffffff" opacity="0.9" />
+  </g>
+
+  <!-- Commercial Badge -->
+  <g transform="translate(16, 16)">
+    <rect x="0" y="0" width="138" height="26" rx="13" fill="#0a0f1d" fill-opacity="0.85" stroke="#38bdf8" stroke-width="1" />
+    <circle cx="14" cy="13" r="5" fill="#0284c7" />
+    <text x="26" y="17" font-family="Arial, sans-serif" font-size="9.5" font-weight="800" fill="#ffffff" letter-spacing="0.3">19L / 5-GALLON REFILL</text>
+  </g>
+
+  <g transform="translate(16, 252)">
+    <rect x="0" y="0" width="148" height="28" rx="8" fill="#0f172a" fill-opacity="0.88" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+    <text x="10" y="13" font-family="Arial, sans-serif" font-size="8.5" font-weight="900" fill="#38bdf8">AL-FAROOQ FOODS</text>
+    <text x="10" y="23" font-family="Arial, sans-serif" font-size="7.5" font-weight="600" fill="#94a3b8">19L Dispenser Bottle Refill</text>
+  </g>
+</svg>
